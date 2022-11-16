@@ -1,0 +1,69 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Configurations>Debug;Release;PreRelease</Configurations>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+
+    <DateTimeVersion>$([System.DateTime]::Now.ToString("yyyy").TrimStart('0')).$([System.DateTime]::Now.ToString("MM").TrimStart('0')).$([System.DateTime]::Now.ToString("dd").TrimStart('0')).$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</DateTimeVersion>
+    <AssemblyVersion>$(DateTimeVersion)</AssemblyVersion>
+    <FileVersion>$(DateTimeVersion)</FileVersion>
+    <VersionPrefix>$(DateTimeVersion)</VersionPrefix>
+
+    <Authors>Carsten Riedel</Authors>
+    <Company>Private entity</Company>
+    <Copyright>Copyright $([System.DateTime]::Now.ToString("yyyy")) Carsten Riedel</Copyright>
+    <Owners>Carsten Riedel</Owners>
+
+    <NeutralLanguage>en</NeutralLanguage>
+    <Description>Basic extension methods</Description>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/carsten-riedel/Coree</PackageProjectUrl>
+    <PackageIconUrl>Icon URL</PackageIconUrl>
+    <RepositoryUrl>https://github.com/carsten-riedel/Coree</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>extensions;common</PackageTags>
+    <PackageReleaseNotes>Release</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <NugetKey>$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetKey.nuget.props"))</NugetKey>
+    <NuGetFileShare>$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetFileShare.nuget.props"))</NuGetFileShare>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+
+  </PropertyGroup>
+
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <VersionSuffix>-deb</VersionSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'PreRelease'">
+    <VersionSuffix>-pre</VersionSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <VersionSuffix></VersionSuffix>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="docs\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="nuget\" />
+  </ItemGroup>
+
+  <Target Name="NugetPackAutoVersioning" AfterTargets="Build" Condition="'$(Configuration)' == 'Release' OR '$(Configuration)' == 'PreRelease'">
+    <Exec Command="dotnet pack --no-build -p:PackageVersion=$(DateTimeVersion)$(VersionSuffix) --configuration $(Configuration) --output &quot;$(ProjectDir)nuget&quot;" />
+    <Exec Command="dotnet nuget push &quot;$(ProjectDir)nuget\*$(DateTimeVersion)*.nupkg&quot; -s $(NuGetFileShare)" />
+    <Exec Command="dotnet nuget push &quot;$(ProjectDir)nuget\*$(DateTimeVersion)*.nupkg&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
+  </Target>
+
+
+</Project>
+
+
+
+

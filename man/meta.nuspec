@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+
+  <metadata>
+
+    <!-- Required elements-->
+    <id>Coree.Meta</id>
+    <version>2.1.2</version>
+    <description>d</description>
+    <authors>x</authors>
+
+    <!-- Optional elements -->
+    <!-- ... -->
+
+      <dependencies>
+        <dependency id="Coree.Extensions" version="2022.11.13.910" />
+      </dependencies>
+      
+  </metadata>
+  <!-- Optional 'files' node -->
+
+
+</package>

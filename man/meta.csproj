@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <NoBuild>true</NoBuild>
+    <IncludeContentInPack>false</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NuspecFile>meta.nuspec</NuspecFile>
+    <NuspecProperties></NuspecProperties>
+    <NuspecBasePath>pack</NuspecBasePath>
+  </PropertyGroup>
+</Project>
