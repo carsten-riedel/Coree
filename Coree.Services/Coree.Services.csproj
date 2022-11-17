@@ -30,10 +30,10 @@
     <PackageReleaseNotes>Release</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
 
-    <NugetKey Condition="Exists('$(SolutionDir)NuGetKey.nuget.props')" >$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetKey.nuget.props"))</NugetKey>
-    <NugetKey Condition="!Exists('$(SolutionDir)NuGetKey.nuget.props')" ></NugetKey>
-    <NuGetFileShare Condition="Exists('$(SolutionDir)NuGetFileShare.nuget.props')" >$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetFileShare.nuget.props"))</NuGetFileShare>
-    <NuGetFileShare Condition="!Exists('$(SolutionDir)NuGetFileShare.nuget.props')" >C:\temp</NuGetFileShare>
+    <NugetKey Condition="Exists('$(SolutionDir)NuGetKey.nuget.props')">$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetKey.nuget.props"))</NugetKey>
+    <NugetKey Condition="!Exists('$(SolutionDir)NuGetKey.nuget.props')"></NugetKey>
+    <NuGetFileShare Condition="Exists('$(SolutionDir)NuGetFileShare.nuget.props')">$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetFileShare.nuget.props"))</NuGetFileShare>
+    <NuGetFileShare Condition="!Exists('$(SolutionDir)NuGetFileShare.nuget.props')">C:\temp</NuGetFileShare>
 
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 
@@ -48,6 +48,10 @@
 
   <ItemGroup>
     <None Include="docs\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <Target Name="TestMessage" AfterTargets="Build">
