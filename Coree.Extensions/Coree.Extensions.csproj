@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+ 
   <PropertyGroup>
-    <Configurations>Debug;ReleaseShare;ReleasePreNetShare;ReleaseNetShare;Meta</Configurations>
+    <Configurations>Debug;Release;PushLocal;PushMeta;PushNuget</Configurations>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -10,6 +11,7 @@
     <AssemblyVersion>$(DateTimeVersion)</AssemblyVersion>
     <FileVersion>$(DateTimeVersion)</FileVersion>
     <VersionPrefix>$(DateTimeVersion)</VersionPrefix>
+    <VersionSuffix />
 
     <Authors>Carsten Riedel</Authors>
     <Company>Private entity</Company>
@@ -27,28 +29,22 @@
     <PackageTags>extensions;common</PackageTags>
     <PackageReleaseNotes>Release</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <NugetKey>$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetKey.nuget.props"))</NugetKey>
-    <NuGetFileShare>$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetFileShare.nuget.props"))</NuGetFileShare>
+
+    <NugetKey Condition="Exists('$(SolutionDir)NuGetKey.nuget.props')" >$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetKey.nuget.props"))</NugetKey>
+    <NugetKey Condition="!Exists('$(SolutionDir)NuGetKey.nuget.props')" ></NugetKey>
+    <NuGetFileShare Condition="Exists('$(SolutionDir)NuGetFileShare.nuget.props')" >$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetFileShare.nuget.props"))</NuGetFileShare>
+    <NuGetFileShare Condition="!Exists('$(SolutionDir)NuGetFileShare.nuget.props')" >C:\temp</NuGetFileShare>
+    
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
 
+    
   </PropertyGroup>
 
-
+<!-- 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <VersionSuffix>-deb</VersionSuffix>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)'=='ReleaseNetShare'">
-    <VersionSuffix />
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)'=='ReleaseShare'">
-    <VersionSuffix />
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)'=='ReleasePreNetShare'">
-    <VersionSuffix>-pre</VersionSuffix>
-  </PropertyGroup>
+-->
 
   <ItemGroup>
     <None Include="docs\README.md" Pack="true" PackagePath="\" />
@@ -58,12 +54,12 @@
     <Message Text="Configuration: $(Configuration)" Importance="high" />
   </Target>
 
-  <Target Name="NugetPackAutoVersioningNetShare" AfterTargets="Build" Condition="'$(Configuration)'=='ReleaseNetShare' Or '$(Configuration)'=='ReleasePreNetShare'">
+  <Target Name="PackAndPush" AfterTargets="Build" Condition="'$(Configuration)'=='PushNuget'">
     <Exec Command="dotnet pack --no-build -p:PackageVersion=$(DateTimeVersion)$(VersionSuffix) --configuration $(Configuration) --output &quot;$(NuGetFileShare)&quot;" />
     <Exec Command="dotnet nuget push &quot;$(NuGetFileShare)\*$(DateTimeVersion)*.nupkg&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
   </Target>
 
-  <Target Name="NugetPackAutoVersioningShare" AfterTargets="Build" Condition="'$(Configuration)' == 'ReleaseShare'">
+  <Target Name="Push" AfterTargets="Build" Condition="'$(Configuration)' == 'PushLocal'">
     <Exec Command="dotnet pack --no-build -p:PackageVersion=$(DateTimeVersion)$(VersionSuffix) --configuration $(Configuration) --output &quot;$(NuGetFileShare)&quot;" />
   </Target>
 
