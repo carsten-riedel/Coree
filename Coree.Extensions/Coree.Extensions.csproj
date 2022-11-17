@@ -54,12 +54,8 @@
     <None Include="docs\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="nuget\" />
-  </ItemGroup>
-
-  <Target Name="TestMessage" AfterTargets="Build" >
-    <Message Text="Configuration: $(Configuration)" Importance="high"/>
+  <Target Name="TestMessage" AfterTargets="Build">
+    <Message Text="Configuration: $(Configuration)" Importance="high" />
   </Target>
 
   <Target Name="NugetPackAutoVersioningNetShare" AfterTargets="Build" Condition="'$(Configuration)'=='ReleaseNetShare' Or '$(Configuration)'=='ReleasePreNetShare'">

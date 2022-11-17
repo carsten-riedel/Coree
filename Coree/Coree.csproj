@@ -19,7 +19,7 @@
     <Owners>Carsten Riedel</Owners>
 
     <NeutralLanguage>en</NeutralLanguage>
-    <Description>Basic extension methods</Description>
+    <Description>Coree Meta Package</Description>
 
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/carsten-riedel/Coree</PackageProjectUrl>
@@ -55,6 +55,10 @@
 
   <ItemGroup>
     <Folder Include="nuget\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Coree.Extensions" Version="2022.11.17.636" />
   </ItemGroup>
 
   <Target Name="NugetPackAutoVersioningNetShare" AfterTargets="Build" Condition="'$(Configuration)'=='Meta'">
