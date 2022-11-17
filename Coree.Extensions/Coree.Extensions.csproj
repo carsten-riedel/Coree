@@ -51,12 +51,16 @@
   </ItemGroup>
 
   <Target Name="TestMessage" AfterTargets="Build">
-    <Message Text="Configuration: $(Configuration)" Importance="high" />
+    <Message Text="-------------------------------------" Importance="high" />
+    <Message Text="." Importance="high" />
+    <Message Text="ProjectName: $(ProjectName)" Importance="high" />
+    <Message Text="." Importance="high" />
+    <Message Text="-------------------------------------" Importance="high" />
   </Target>
 
   <Target Name="PackAndPush" AfterTargets="Build" Condition="'$(Configuration)'=='PushNuget'">
     <Exec Command="dotnet pack --no-build -p:PackageVersion=$(DateTimeVersion)$(VersionSuffix) --configuration $(Configuration) --output &quot;$(NuGetFileShare)&quot;" />
-    <Exec Command="dotnet nuget push &quot;$(NuGetFileShare)\*$(DateTimeVersion)*.nupkg&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
+    <Exec Command="dotnet nuget push &quot;$(NuGetFileShare)\$(ProjectName).$(DateTimeVersion).nupkg&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
   </Target>
 
   <Target Name="Push" AfterTargets="Build" Condition="'$(Configuration)' == 'PushLocal'">

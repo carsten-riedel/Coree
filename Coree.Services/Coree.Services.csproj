@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
- 
+
+
   <PropertyGroup>
     <Configurations>Debug;Release;PushLocal;PushMeta;PushNuget</Configurations>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
-    <IncludeBuildOutput>false</IncludeBuildOutput>
 
     <DateTimeVersion>$([System.DateTime]::Now.ToString("yyyy").TrimStart('0')).$([System.DateTime]::Now.ToString("MM").TrimStart('0')).$([System.DateTime]::Now.ToString("dd").TrimStart('0')).$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</DateTimeVersion>
     <AssemblyVersion>$(DateTimeVersion)</AssemblyVersion>
@@ -20,41 +19,58 @@
     <Owners>Carsten Riedel</Owners>
 
     <NeutralLanguage>en</NeutralLanguage>
-    <Description>Coree Meta Package</Description>
+    <Description>Basic Services</Description>
 
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/carsten-riedel/Coree</PackageProjectUrl>
     <PackageIconUrl>Icon URL</PackageIconUrl>
     <RepositoryUrl>https://github.com/carsten-riedel/Coree</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>extensions;common</PackageTags>
+    <PackageTags>services;common</PackageTags>
     <PackageReleaseNotes>Release</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    
-    <NugetKey Condition="Exists('$(SolutionDir)NuGetKey.nuget.props')">$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetKey.nuget.props"))</NugetKey>
-    <NugetKey Condition="!Exists('$(SolutionDir)NuGetKey.nuget.props')"></NugetKey>
-    <NuGetFileShare Condition="Exists('$(SolutionDir)NuGetFileShare.nuget.props')">$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetFileShare.nuget.props"))</NuGetFileShare>
-    <NuGetFileShare Condition="!Exists('$(SolutionDir)NuGetFileShare.nuget.props')">C:\temp</NuGetFileShare>
-    <NoWarn>NU5128</NoWarn>
+
+    <NugetKey Condition="Exists('$(SolutionDir)NuGetKey.nuget.props')" >$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetKey.nuget.props"))</NugetKey>
+    <NugetKey Condition="!Exists('$(SolutionDir)NuGetKey.nuget.props')" ></NugetKey>
+    <NuGetFileShare Condition="Exists('$(SolutionDir)NuGetFileShare.nuget.props')" >$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetFileShare.nuget.props"))</NuGetFileShare>
+    <NuGetFileShare Condition="!Exists('$(SolutionDir)NuGetFileShare.nuget.props')" >C:\temp</NuGetFileShare>
+
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+
+
   </PropertyGroup>
+
+  <!-- 
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <VersionSuffix>-deb</VersionSuffix>
+  </PropertyGroup>
+-->
 
   <ItemGroup>
     <None Include="docs\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Coree.Extensions" Version="2022.11.17.2116" />
-    <PackageReference Include="Coree.Services" Version="2022.11.17.2116" />
-    
-  </ItemGroup>
+  <Target Name="TestMessage" AfterTargets="Build">
+    <Message Text="-------------------------------------" Importance="high" />
+    <Message Text="." Importance="high" />
+    <Message Text="ProjectName: $(ProjectName)" Importance="high" />
+    <Message Text="." Importance="high" />
+    <Message Text="-------------------------------------" Importance="high" />
+  </Target>
 
-  <Target Name="PackAndPush" AfterTargets="Build" Condition="'$(Configuration)'=='PushMeta'">
+  <Target Name="PackAndPush" AfterTargets="Build" Condition="'$(Configuration)'=='PushNuget'">
     <Exec Command="dotnet pack --no-build -p:PackageVersion=$(DateTimeVersion)$(VersionSuffix) --configuration $(Configuration) --output &quot;$(NuGetFileShare)&quot;" />
     <Exec Command="dotnet nuget push &quot;$(NuGetFileShare)\$(ProjectName).$(DateTimeVersion).nupkg&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
   </Target>
 
-  <Target Name="Pack" AfterTargets="Build" Condition="'$(Configuration)'=='PushLocal'">
+  <Target Name="Push" AfterTargets="Build" Condition="'$(Configuration)' == 'PushLocal'">
     <Exec Command="dotnet pack --no-build -p:PackageVersion=$(DateTimeVersion)$(VersionSuffix) --configuration $(Configuration) --output &quot;$(NuGetFileShare)&quot;" />
   </Target>
 
+
 </Project>
+
+
+
+
+
