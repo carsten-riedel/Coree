@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+
     <DateTimeVersion>$([System.DateTime]::Now.ToString("yyyy").TrimStart('0')).$([System.DateTime]::Now.ToString("MM").TrimStart('0')).$([System.DateTime]::Now.ToString("dd").TrimStart('0')).$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</DateTimeVersion>
     <AssemblyVersion>$(DateTimeVersion)</AssemblyVersion>
     <FileVersion>$(DateTimeVersion)</FileVersion>
@@ -27,23 +29,20 @@
     <PackageTags>extensions;common</PackageTags>
     <PackageReleaseNotes>Release</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <NugetKey>$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetKey.nuget.props"))</NugetKey>
-    <NuGetFileShare>$([System.IO.File]::ReadAllText("$(SolutionDir)NuGetFileShare.nuget.props"))</NuGetFileShare>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-
+    <NugetKey>$([System.IO.File]::ReadAllText("$(ProjectDir)NuGetKey.nuget.props"))</NugetKey>
+    <NuGetFileShare>$([System.IO.File]::ReadAllText("$(ProjectDir)NuGetFileShare.nuget.props"))</NuGetFileShare>
   </PropertyGroup>
-
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <VersionSuffix>-deb</VersionSuffix>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='ReleaseNetShare'">
-    <VersionSuffix />
+    <VersionSuffix></VersionSuffix>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='ReleaseShare'">
-    <VersionSuffix />
+    <VersionSuffix></VersionSuffix>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='ReleasePreNetShare'">
@@ -58,22 +57,9 @@
     <Folder Include="nuget\" />
   </ItemGroup>
 
-  <Target Name="TestMessage" AfterTargets="Build" >
-    <Message Text="Configuration: $(Configuration)" Importance="high"/>
-  </Target>
-
-  <Target Name="NugetPackAutoVersioningNetShare" AfterTargets="Build" Condition="'$(Configuration)'=='ReleaseNetShare' Or '$(Configuration)'=='ReleasePreNetShare'">
+  <Target Name="NugetPackAutoVersioningNetShare" AfterTargets="Build" Condition="'$(Configuration)'=='Meta'">
     <Exec Command="dotnet pack --no-build -p:PackageVersion=$(DateTimeVersion)$(VersionSuffix) --configuration $(Configuration) --output &quot;$(NuGetFileShare)&quot;" />
     <Exec Command="dotnet nuget push &quot;$(NuGetFileShare)\*$(DateTimeVersion)*.nupkg&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
   </Target>
 
-  <Target Name="NugetPackAutoVersioningShare" AfterTargets="Build" Condition="'$(Configuration)' == 'ReleaseShare'">
-    <Exec Command="dotnet pack --no-build -p:PackageVersion=$(DateTimeVersion)$(VersionSuffix) --configuration $(Configuration) --output &quot;$(NuGetFileShare)&quot;" />
-  </Target>
-
-
 </Project>
-
-
-
-
