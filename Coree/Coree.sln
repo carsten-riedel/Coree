@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coree", "Coree.csproj", "{B3DECF9C-2645-4173-82CD-93046C7DD61F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		PushDebugLocal|Any CPU = PushDebugLocal|Any CPU
+		PushReleaseNuget|Any CPU = PushReleaseNuget|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3DECF9C-2645-4173-82CD-93046C7DD61F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3DECF9C-2645-4173-82CD-93046C7DD61F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3DECF9C-2645-4173-82CD-93046C7DD61F}.PushDebugLocal|Any CPU.ActiveCfg = PushDebugLocal|Any CPU
+		{B3DECF9C-2645-4173-82CD-93046C7DD61F}.PushDebugLocal|Any CPU.Build.0 = PushDebugLocal|Any CPU
+		{B3DECF9C-2645-4173-82CD-93046C7DD61F}.PushReleaseNuget|Any CPU.ActiveCfg = PushReleaseNuget|Any CPU
+		{B3DECF9C-2645-4173-82CD-93046C7DD61F}.PushReleaseNuget|Any CPU.Build.0 = PushReleaseNuget|Any CPU
+		{B3DECF9C-2645-4173-82CD-93046C7DD61F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3DECF9C-2645-4173-82CD-93046C7DD61F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23F28346-5D30-4E60-8DC4-B091A1D8DAAD}
+	EndGlobalSection
+EndGlobal
