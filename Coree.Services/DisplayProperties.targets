@@ -57,8 +57,12 @@
     <Message Text="%0a" Importance="high" />
     <Message Text=" MSBuildProjectFile: $(MSBuildProjectFile)" Importance="high" />
     <Message Text=" MSBuildThisFile:    $(MSBuildThisFile)" Importance="high" />
+    <Message Text=" MSBuildThisFile:    $(Yearx)" Importance="high" />
+    <Message Text=" MSBuildThisFile:    $(YearMonth)" Importance="high" />
+    <Message Text=" MSBuildThisFile:    $(YearMonthx)" Importance="high" />
     <Message Text="%0a" Importance="high" />
     <Message Text="%0a" Importance="high" />
+    
   </Target>
 
   

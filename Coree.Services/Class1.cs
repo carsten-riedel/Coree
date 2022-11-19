@@ -19,6 +19,7 @@ namespace Coree.Services
     {
         public static IServiceCollection UseHelloService(this IServiceCollection services)
         {
+            DateTime.Now.ToString("M").Substring(2);
             return services.AddScoped<IHelloService, HelloService>();
         }
     }
