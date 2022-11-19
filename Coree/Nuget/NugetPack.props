@@ -1,13 +1,35 @@
 ﻿<Project>
 
   <PropertyGroup>
-    <VersionDateTime>$([System.DateTime]::Now.ToString("yyyy").TrimStart('0')).$([System.DateTime]::Now.ToString("MM").TrimStart('0')).$([System.DateTime]::Now.ToString("dd").TrimStart('0')).$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</VersionDateTime>
-    <VersionPrefix Condition="'$(VersionPrefix)' == '' ">$(VersionDateTime)</VersionPrefix>
+
+    <VersionMajorDef></VersionMajorDef>
+    <VersionMinorDef></VersionMinorDef>
+    <VersionBuildDef></VersionBuildDef>
+    <VersionRevisionDef></VersionRevisionDef>
+
+    <VersionMajorSet Condition="'$(VersionMajorDef)' == ''">$([System.DateTime]::Now.ToString("yyyy").TrimStart('0'))</VersionMajorSet>
+    <VersionMajorSet Condition="'$(VersionMajorDef)' != ''">$(VersionMajorDef)</VersionMajorSet>
+    <VersionMinorSet Condition="'$(VersionMinorDef)' == ''">$([System.DateTime]::Now.ToString("MM").TrimStart('0'))</VersionMinorSet>
+    <VersionMinorSet Condition="'$(VersionMinorDef)' != ''">$(VersionMinorDef)</VersionMinorSet>
+    <VersionBuildSet Condition="'$(VersionBuildDef)' == ''">$([System.DateTime]::Now.ToString("dd").TrimStart('0'))</VersionBuildSet>
+    <VersionBuildSet Condition="'$(VersionBuildDef)' != ''">$(VersionBuildDef)</VersionBuildSet>
+    <VersionRevisionSet Condition="'$(VersionRevisionDef)' == ''">$([System.DateTime]::Now.ToString("HHmmf").TrimStart('0'))</VersionRevisionSet>
+    <VersionRevisionSet Condition="'$(VersionRevisionDef)' != ''">$(VersionRevisionDef)</VersionRevisionSet>
+
+    <VersionRevisionSetZero Condition="'$(VersionRevisionSet)' == ''"></VersionRevisionSetZero>
+    <VersionRevisionSetZero Condition="'$(VersionRevisionSet)' == '0'"></VersionRevisionSetZero>
+    <VersionRevisionSetZero Condition="'$(VersionRevisionSet)' != '0'">.$(VersionRevisionSet)</VersionRevisionSetZero>
+
+    <MyVersion>$(VersionMajorSet).$(VersionMinorSet).$(VersionBuildSet)$(VersionRevisionSetZero)</MyVersion>
+
+    <NugetPublishDebug>false</NugetPublishDebug>
+    
+    <VersionPrefix Condition="'$(VersionPrefix)' == '' ">$(MyVersion)</VersionPrefix>
     <VersionSuffix Condition="'$(Configuration)'=='Debug'">-pre</VersionSuffix>
     <VersionSuffix Condition="'$(Configuration)'=='Release'"></VersionSuffix>
 
-    <AssemblyVersion Condition="'$(Copyright)'==''">$(VersionDateTime)</AssemblyVersion>
-    <FileVersion Condition="'$(FileVersion)'==''">$(VersionDateTime)</FileVersion>
+    <AssemblyVersion Condition="'$(Copyright)'==''">$(MyVersion)</AssemblyVersion>
+    <FileVersion Condition="'$(FileVersion)'==''">$(MyVersion)</FileVersion>
     <NeutralLanguage Condition="'$(NeutralLanguage)'==''">en</NeutralLanguage>
     <Authors>Carsten Riedel</Authors>
     <Company Condition="'$(Company)'==''">$(Authors)</Company>
