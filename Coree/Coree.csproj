@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Coree.Classes" Version="1.22.1119.2040" />
+    <PackageReference Include="Coree.Controls" Version="1.22.1119.2054" />
     <PackageReference Include="Coree.Extensions" Version="1.22.1119.2025" />
     <PackageReference Include="Coree.Services" Version="1.22.1119.2025" />
   </ItemGroup>
