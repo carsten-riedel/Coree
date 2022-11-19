@@ -1,0 +1,66 @@
+﻿<Project>
+  
+  <!-- In .csproj <Import Project="DisplayProperties.targets" /> -->
+  <!-- https://learn.microsoft.com/en-us/cpp/build/reference/common-macros-for-build-commands-and-properties?view=msvc-170 -->
+
+  <PropertyGroup>
+    <AfterTar>PreBuildEvent</AfterTar>
+  </PropertyGroup>
+  
+  <Target Name="DisplayPropertiesFile" AfterTargets="$(AfterTar)">
+    <Message Text="$(NewFile)%0a" Importance="high" />
+    <Message Text=" ↓↓↓↓↓↓↓↓↓ $(MSBuildProjectFile.PadRight(30, ' ')) -> $(MSBuildThisFile.PadRight(30, ' ')) -> $(AfterTar.PadRight(19, ' ')) ↓↓↓↓↓↓↓↓↓" Importance="high" />
+    <Message Text="$(NewFile)%0a" Importance="high" />
+  </Target>
+  
+  <Target Name="DisplayPropertiesCommon" AfterTargets="$(AfterTar)">
+      <Message Text=" **$([System.String]::new('*',103))**" Importance="high" />
+      <Message Text=" ** $([System.String]::new(&quot;$(AfterTar) list of MSBuild Common props in $(MSBuildThisFile)&quot;).PadRight(101)) **" Importance="high" />
+      <Message Text=" ** $([System.String]::new(&quot;&quot;).PadRight(100))  **" Importance="high" />
+      <Message Text=" ** $([System.String]::new(&quot;SolutionName:&quot;).PadRight(30)) $(SolutionName.PadRight(70)) **" Importance="high" />
+      <Message Text=" ** $([System.String]::new(&quot;ProjectName:&quot;).PadRight(30)) $(ProjectName.PadRight(70)) **" Importance="high" />
+      <Message Text=" ** $([System.String]::new(&quot;Configuration:&quot;).PadRight(30)) $(Configuration.PadRight(70)) **" Importance="high" />
+      <Message Text=" ** $([System.String]::new(&quot;Platform:&quot;).PadRight(30)) $(Platform.PadRight(70)) **" Importance="high" />
+      <Message Text=" ** $([System.String]::new(&quot;SolutionDir:&quot;).PadRight(30)) $(SolutionDir.PadRight(70)) **" Importance="high" />
+      <Message Text=" ** $([System.String]::new(&quot;ProjectDir:&quot;).PadRight(30)) $(ProjectDir.PadRight(70)) **" Importance="high" />
+      <Message Text=" ** $([System.String]::new(&quot;&quot;).PadRight(100))  **" Importance="high" />
+      <Message Text=" **$([System.String]::new('*',103))**" Importance="high" />
+      <Message Text="%0a" Importance="high" />
+      <Message Text="%0a" Importance="high" />
+
+  </Target>
+
+  <!-- https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#assemblyinfo-properties -->
+  <Target Name="DisplayPropertiesSDK" AfterTargets="$(AfterTar)">
+    <Message Text=" **$([System.String]::new('*',103))**" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;$(AfterTar) list of Microsoft.NET.Sdk props in $(MSBuildThisFile)&quot;).PadRight(101)) **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;&quot;).PadRight(100))  **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;Company:&quot;).PadRight(30)) $(Company.PadRight(70)) **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;Configuration:&quot;).PadRight(30)) $(Configuration.PadRight(70)) **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;Copyright:&quot;).PadRight(30)) $(Copyright.PadRight(70)) **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;Description:&quot;).PadRight(30)) $(Description.PadRight(70)) **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;FileVersion:&quot;).PadRight(30)) $(FileVersion.PadRight(70)) **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;InformationalVersion:&quot;).PadRight(30)) $(InformationalVersion.PadRight(70)) **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;AssemblyTitle:&quot;).PadRight(30)) $(AssemblyTitle.PadRight(70)) **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;AssemblyVersion:&quot;).PadRight(30)) $(AssemblyVersion.PadRight(70)) **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;NeutralLanguage:&quot;).PadRight(30)) $(NeutralLanguage.PadRight(70)) **" Importance="high" />
+    <Message Text=" ** $([System.String]::new(&quot;&quot;).PadRight(100))  **" Importance="high" />
+    <Message Text=" **$([System.String]::new('*',103))**" Importance="high" />
+    <Message Text="%0a" Importance="high" />
+    <Message Text="%0a" Importance="high" />
+  </Target>
+
+  
+  <!-- https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-reserved-and-well-known-properties?view=vs-2022 -->
+  <Target Name="{TargetNameProp}x" AfterTargets="$(AfterTar)">
+    <Message Text=" +++$(TargetNameProp.PadRight(10)) PreBuildEvent" Importance="high" />
+    <Message Text="%0a" Importance="high" />
+    <Message Text=" MSBuildProjectFile: $(MSBuildProjectFile)" Importance="high" />
+    <Message Text=" MSBuildThisFile:    $(MSBuildThisFile)" Importance="high" />
+    <Message Text="%0a" Importance="high" />
+    <Message Text="%0a" Importance="high" />
+  </Target>
+
+  
+
+</Project>

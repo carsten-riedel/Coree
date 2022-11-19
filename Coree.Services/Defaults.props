@@ -1,5 +1,5 @@
 ﻿<Project>
-
+  
   <PropertyGroup>
 
     <VersionMajorDef>1</VersionMajorDef>
@@ -21,39 +21,15 @@
     <VersionRevisionSetZero Condition="'$(VersionRevisionSet)' != '0'">.$(VersionRevisionSet)</VersionRevisionSetZero>
 
     <MyVersion>$(VersionMajorSet).$(VersionMinorSet).$(VersionBuildSet)$(VersionRevisionSetZero)</MyVersion>
-
-    <NugetPublishDebug>false</NugetPublishDebug>
     
-    <VersionPrefix Condition="'$(VersionPrefix)' == '' ">$(MyVersion)</VersionPrefix>
-    <VersionSuffix Condition="'$(Configuration)'=='Debug'">-pre</VersionSuffix>
-    <VersionSuffix Condition="'$(Configuration)'=='Release'"></VersionSuffix>
-
     <AssemblyVersion Condition="'$(Copyright)'==''">$(MyVersion)</AssemblyVersion>
     <FileVersion Condition="'$(FileVersion)'==''">$(MyVersion)</FileVersion>
     <NeutralLanguage Condition="'$(NeutralLanguage)'==''">en</NeutralLanguage>
     <Authors>Carsten Riedel</Authors>
     <Company Condition="'$(Company)'==''">$(Authors)</Company>
     <Copyright Condition="'$(Copyright)'==''">Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Company)</Copyright>
-    
-    <Owners>Carsten Riedel</Owners>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    
-    <Description>Coree Meta Package</Description>
-    <PackageTags>Coree;meta</PackageTags>
-    
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/carsten-riedel/Coree</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    
-    <PackageProjectUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree</PackageProjectUrl>
-    <PackageIconUrl>Icon URL</PackageIconUrl>
-    
-    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildThisFileDirectory)ReleaseNotes.txt"))</PackageReleaseNotes>
-   
-    <PackageReadmeFile>Nuget\README.md</PackageReadmeFile>
-    <NoWarn>NU5128</NoWarn>
-  </PropertyGroup>
+  
 
-
-
+</PropertyGroup>
+  
 </Project>

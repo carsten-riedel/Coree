@@ -38,14 +38,14 @@
     <Owners>Carsten Riedel</Owners>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     
-    <Description>Coree Meta Package</Description>
-    <PackageTags>Coree;meta</PackageTags>
+    <Description>Coree common services</Description>
+    <PackageTags>Coree;services;common</PackageTags>
     
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/carsten-riedel/Coree</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     
-    <PackageProjectUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree.Services</PackageProjectUrl>
     <PackageIconUrl>Icon URL</PackageIconUrl>
     
     <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildThisFileDirectory)ReleaseNotes.txt"))</PackageReleaseNotes>

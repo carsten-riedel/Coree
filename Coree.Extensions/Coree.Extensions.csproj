@@ -1,64 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
  
   <PropertyGroup>
-    <Configurations>Debug;Release;PushDebugLocal;PushReleaseNuget</Configurations>
+    <Configurations>Debug;Release</Configurations>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
-    <DateTimeVersion>$([System.DateTime]::Now.ToString("yyyy").TrimStart('0')).$([System.DateTime]::Now.ToString("MM").TrimStart('0')).$([System.DateTime]::Now.ToString("dd").TrimStart('0')).$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</DateTimeVersion>
-    <AssemblyVersion>$(DateTimeVersion)</AssemblyVersion>
-    <FileVersion>$(DateTimeVersion)</FileVersion>
-    <VersionPrefix>$(DateTimeVersion)</VersionPrefix>
-    <VersionSuffix />
-
-    <Authors>Carsten Riedel</Authors>
-    <Company>Private entity</Company>
-    <Copyright>Copyright $([System.DateTime]::Now.ToString("yyyy")) Carsten Riedel</Copyright>
-    <Owners>Carsten Riedel</Owners>
-
-    <NeutralLanguage>en</NeutralLanguage>
-    <Description>Coree basic extension methods</Description>
-
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree.Extensions</PackageProjectUrl>
-    <PackageIconUrl>Icon URL</PackageIconUrl>
-    <RepositoryUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree.Extensions</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>extensions;common</PackageTags>
-    <PackageReleaseNotes>Release</PackageReleaseNotes>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    
-    <NugetKey Condition="Exists('$(ProjectDir)NuGetKey.nuget.props')">$([System.IO.File]::ReadAllText("$(ProjectDir)NuGetKey.nuget.props"))</NugetKey>
-    <NugetKey Condition="!Exists('$(ProjectDir)NuGetKey.nuget.props')"></NugetKey>
-    <NuGetFileShare Condition="Exists('$(ProjectDir)NuGetFileShare.nuget.props')">$([System.IO.File]::ReadAllText("$(ProjectDir)NuGetFileShare.nuget.props"))</NuGetFileShare>
-    <NuGetFileShare Condition="!Exists('$(ProjectDir)NuGetFileShare.nuget.props')">C:\temp</NuGetFileShare>
    </PropertyGroup>
 
-  <Target Name="TestMessage" AfterTargets="Build">
-    <Message Text="-------------------------------------" Importance="high" />
-    <Message Text="." Importance="high" />
-    <Message Text="ProjectName:    $(ProjectName)" Importance="high" />
-    <Message Text="Configuration:  $(Configuration)" Importance="high" />
-    <Message Text="ProjectDir:     $(ProjectDir)" Importance="high" />
-    <Message Text="NuGetFileShare: $(NuGetFileShare)" Importance="high" />
-    <Message Text="NugetKey:       $(NugetKey)" Importance="high" />
-    <Message Text="." Importance="high" />
-    <Message Text="-------------------------------------" Importance="high" />
-  </Target>
-  
-  
-  <ItemGroup>
-    <None Include="docs\README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
-
-  <Target Name="MakeNugetPackageLocal" AfterTargets="Build" Condition="'$(Configuration)'=='PushDebugLocal'">
-    <Exec Command="dotnet pack --no-build -p:PackageVersion=$(DateTimeVersion)$(VersionSuffix) --configuration $(Configuration) --output &quot;$(NuGetFileShare)&quot;" />
-  </Target>
-
-  <Target Name="MakeNugetPackageRemote" AfterTargets="Build" Condition="'$(Configuration)'=='PushReleaseNuget'">
-    <Exec Command="dotnet pack --no-build -p:PackageVersion=$(DateTimeVersion)$(VersionSuffix) --configuration $(Configuration) --output &quot;$(NuGetFileShare)&quot;" />
-    <Exec Command="dotnet nuget push &quot;$(NuGetFileShare)\$(ProjectName).$(DateTimeVersion).nupkg&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
-  </Target>
+  <Import Project="Defaults.props" />
+  <Import Project="DisplayProperties.targets" />
+  <Import Project="Nuget\NugetPack.targets" />
 
 </Project>
