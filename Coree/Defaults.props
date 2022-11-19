@@ -2,7 +2,7 @@
   
   <PropertyGroup>
 
-    <VersionMajorDef></VersionMajorDef>
+    <VersionMajorDef>1</VersionMajorDef>
     <VersionMinorDef></VersionMinorDef>
     <VersionBuildDef></VersionBuildDef>
     <VersionRevisionDef></VersionRevisionDef>
