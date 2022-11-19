@@ -1,0 +1,58 @@
+﻿<Project>
+
+  <PropertyGroup>
+
+    <VersionMajorDef>1</VersionMajorDef>
+    <VersionMinorDef></VersionMinorDef>
+    <VersionBuildDef></VersionBuildDef>
+    <VersionRevisionDef></VersionRevisionDef>
+
+    <VersionMajorSet Condition="'$(VersionMajorDef)' == ''">$([System.DateTime]::Now.ToString("yy").TrimStart('0'))</VersionMajorSet>
+    <VersionMajorSet Condition="'$(VersionMajorDef)' != ''">$(VersionMajorDef)</VersionMajorSet>
+    <VersionMinorSet Condition="'$(VersionMinorDef)' == ''">$([System.DateTime]::Now.ToString("yy").TrimStart('0'))</VersionMinorSet>
+    <VersionMinorSet Condition="'$(VersionMinorDef)' != ''">$(VersionMinorDef)</VersionMinorSet>
+    <VersionBuildSet Condition="'$(VersionBuildDef)' == ''">$([System.DateTime]::Now.ToString("MMdd").TrimStart('0'))</VersionBuildSet>
+    <VersionBuildSet Condition="'$(VersionBuildDef)' != ''">$(VersionBuildDef)</VersionBuildSet>
+    <VersionRevisionSet Condition="'$(VersionRevisionDef)' == ''">$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</VersionRevisionSet>
+    <VersionRevisionSet Condition="'$(VersionRevisionDef)' != ''">$(VersionRevisionDef)</VersionRevisionSet>
+
+    <VersionRevisionSetZero Condition="'$(VersionRevisionSet)' == ''"></VersionRevisionSetZero>
+    <VersionRevisionSetZero Condition="'$(VersionRevisionSet)' == '0'"></VersionRevisionSetZero>
+    <VersionRevisionSetZero Condition="'$(VersionRevisionSet)' != '0'">.$(VersionRevisionSet)</VersionRevisionSetZero>
+
+    <MyVersion>$(VersionMajorSet).$(VersionMinorSet).$(VersionBuildSet)$(VersionRevisionSetZero)</MyVersion>
+
+    <NugetPublishDebug>false</NugetPublishDebug>
+    
+    <VersionPrefix Condition="'$(VersionPrefix)' == '' ">$(MyVersion)</VersionPrefix>
+    <VersionSuffix Condition="'$(Configuration)'=='Debug'">-pre</VersionSuffix>
+    <VersionSuffix Condition="'$(Configuration)'=='Release'"></VersionSuffix>
+
+    <AssemblyVersion Condition="'$(Copyright)'==''">$(MyVersion)</AssemblyVersion>
+    <FileVersion Condition="'$(FileVersion)'==''">$(MyVersion)</FileVersion>
+    <NeutralLanguage Condition="'$(NeutralLanguage)'==''">en</NeutralLanguage>
+    <Authors>Carsten Riedel</Authors>
+    <Company Condition="'$(Company)'==''">$(Authors)</Company>
+    <Copyright Condition="'$(Copyright)'==''">Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Company)</Copyright>
+    
+    <Owners>Carsten Riedel</Owners>
+   
+    <Description>Coree controls</Description>
+    <PackageTags>Coree;Controls;common</PackageTags>
+    
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/carsten-riedel/Coree</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    
+    <PackageProjectUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree.Controls</PackageProjectUrl>
+    <PackageIconUrl>Icon URL</PackageIconUrl>
+    
+    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildThisFileDirectory)ReleaseNotes.txt"))</PackageReleaseNotes>
+   
+    <PackageReadmeFile>Nuget\README.md</PackageReadmeFile>
+    <NoWarn>NU5128</NoWarn>
+  </PropertyGroup>
+
+
+
+</Project>
