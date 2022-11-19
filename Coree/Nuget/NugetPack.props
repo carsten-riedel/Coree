@@ -1,0 +1,34 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <VersionDateTime>$([System.DateTime]::Now.ToString("yyyy").TrimStart('0')).$([System.DateTime]::Now.ToString("MM").TrimStart('0')).$([System.DateTime]::Now.ToString("dd").TrimStart('0')).$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</VersionDateTime>
+    <VersionPrefix Condition="'$(VersionPrefix)' == '' ">$(VersionDateTime)</VersionPrefix>
+    <VersionSuffix Condition="'$(Configuration)'=='Debug'">-pre</VersionSuffix>
+    <VersionSuffix Condition="'$(Configuration)'=='Release'"></VersionSuffix>
+
+    <AssemblyVersion Condition="'$(Copyright)'==''">$(VersionDateTime)</AssemblyVersion>
+    <FileVersion Condition="'$(FileVersion)'==''">$(VersionDateTime)</FileVersion>
+    <NeutralLanguage Condition="'$(NeutralLanguage)'==''">en</NeutralLanguage>
+    <Authors>Carsten Riedel</Authors>
+    <Company Condition="'$(Company)'==''">$(Authors)</Company>
+    <Copyright Condition="'$(Copyright)'==''">Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Company)</Copyright>
+    
+    <Owners>Carsten Riedel</Owners>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    
+    <Description>Coree Meta Package</Description>
+    <PackageTags>coree;meta</PackageTags>
+    
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/carsten-riedel/Coree</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    
+    <PackageProjectUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree</PackageProjectUrl>
+    <PackageIconUrl>Icon URL</PackageIconUrl>
+    
+    <PackageReleaseNotes>Release</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <NoWarn>NU5128</NoWarn>
+  </PropertyGroup>
+
+</Project>

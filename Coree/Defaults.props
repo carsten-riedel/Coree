@@ -1,0 +1,14 @@
+﻿<Project>
+  
+  <PropertyGroup>
+    <VersionDateTime>$([System.DateTime]::Now.ToString("yyyy").TrimStart('0')).$([System.DateTime]::Now.ToString("MM").TrimStart('0')).$([System.DateTime]::Now.ToString("dd").TrimStart('0')).$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</VersionDateTime>
+    
+    <AssemblyVersion Condition="'$(Copyright)'==''">$(VersionDateTime)</AssemblyVersion>
+    <FileVersion Condition="'$(FileVersion)'==''">$(VersionDateTime)</FileVersion>
+    <NeutralLanguage Condition="'$(NeutralLanguage)'==''">en</NeutralLanguage>
+    <Authors>Carsten Riedel</Authors>
+    <Company Condition="'$(Company)'==''">$(Authors)</Company>
+    <Copyright Condition="'$(Copyright)'==''">Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Company)</Copyright>
+  </PropertyGroup>
+  
+</Project>
