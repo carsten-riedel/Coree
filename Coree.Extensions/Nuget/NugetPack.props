@@ -36,8 +36,7 @@
     <Copyright Condition="'$(Copyright)'==''">Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Company)</Copyright>
     
     <Owners>Carsten Riedel</Owners>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    
+   
     <Description>Coree common extensions</Description>
     <PackageTags>Coree;extensions;common</PackageTags>
     
