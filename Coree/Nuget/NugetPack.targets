@@ -16,6 +16,8 @@ Nuget.key
     <WriteLinesToFile File="$(MSBuildThisFileDirectory).gitignore" Lines="$(GitIgnoreDef)" Overwrite="True"  Condition="!Exists('$(MSBuildThisFileDirectory).gitignore')"/>
     <WriteLinesToFile File="$(MSBuildThisFileDirectory)Nuget.key" Lines="" Overwrite="True"  Condition="!Exists('$(MSBuildThisFileDirectory)Nuget.key')"/>
     <WriteLinesToFile File="$(MSBuildThisFileDirectory)Nuget.dir" Lines="$(MSBuildThisFileDirectory.Trim('\'))" Overwrite="True"  Condition="!Exists('$(MSBuildThisFileDirectory)Nuget.dir')"/>
+    <WriteLinesToFile File="$(MSBuildThisFileDirectory)README.md" Lines="" Overwrite="True"  Condition="!Exists('$(MSBuildThisFileDirectory)README.md')"/>
+    <WriteLinesToFile File="$(MSBuildThisFileDirectory)ReleaseNotes.txt" Lines="" Overwrite="True"  Condition="!Exists('$(MSBuildThisFileDirectory)ReleaseNotes.txt')"/>
     <PropertyGroup>
       <NugetKeyFromFile>$([System.IO.File]::ReadAllText("$(MSBuildThisFileDirectory)Nuget.key"))</NugetKeyFromFile>
       <NuGetDirFromFile>$([System.IO.File]::ReadAllText("$(MSBuildThisFileDirectory)Nuget.dir"))</NuGetDirFromFile>
@@ -43,5 +45,9 @@ Nuget.key
     <Message Text="NugetPackPush $(VersionPrefix)" Importance="high" />
     <Exec Command="dotnet nuget push &quot;$(NuGetDir)\$(ProjectName).$(VersionPrefix)$(VersionSuffix).nupkg&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
   </Target>
+
+  <ItemGroup>
+    <None Update="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
   
 </Project>

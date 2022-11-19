@@ -16,8 +16,6 @@
     <PackageReference Include="Coree.Services" Version="2022.11.18.709" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
+
 
 </Project>

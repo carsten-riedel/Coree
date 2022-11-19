@@ -26,9 +26,12 @@
     <PackageProjectUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree</PackageProjectUrl>
     <PackageIconUrl>Icon URL</PackageIconUrl>
     
-    <PackageReleaseNotes>Release</PackageReleaseNotes>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildThisFileDirectory)ReleaseNotes.txt"))</PackageReleaseNotes>
+   
+    <PackageReadmeFile>Nuget\README.md</PackageReadmeFile>
     <NoWarn>NU5128</NoWarn>
   </PropertyGroup>
+
+
 
 </Project>
