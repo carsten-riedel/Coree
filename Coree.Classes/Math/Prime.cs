@@ -9,7 +9,40 @@ namespace Coree.Classes.Math
     {
         public class StateFullPrimeGenerator
         {
+            private System.Threading.SynchronizationContext uiContext;
+            public class PrimeCalculatedEventArgs
+            {
+                public int Primex { get; set; }
+            }
+
+
+            private event EventHandler<PrimeCalculatedEventArgs> _PrimeCalculatedEvent;
+
+            public event EventHandler<PrimeCalculatedEventArgs> PrimeCalculatedEvent
+            {
+                add
+                {
+                    uiContext = System.ComponentModel.AsyncOperationManager.SynchronizationContext;
+                    _PrimeCalculatedEvent += value;
+                }
+
+                remove
+                {
+                    _PrimeCalculatedEvent -= value;
+                }
+            }
+
+            protected virtual void OnPrimeCalculated(int e)
+            {
+                EventHandler<PrimeCalculatedEventArgs> handler = _PrimeCalculatedEvent;
+                if (handler != null)
+                {
+                    uiContext.Post(new System.Threading.SendOrPostCallback((o)=> { handler(this, new PrimeCalculatedEventArgs() { Primex = e }); ; }), null);
+                }
+            }
+
             public List<int> primes = new();
+            public List<int> nonprimes = new();
 
             private int toBeTestedPointer;
 
@@ -36,11 +69,20 @@ namespace Coree.Classes.Math
             {
             }
 
+
+            public void GeneratePrimesNaiveT(int amount)
+            {
+                System.Threading.Thread thread = new Thread((o)=>GeneratePrimesNaive(amount));
+                thread.IsBackground = true;
+                thread.Start();
+            }
             public void GeneratePrimesNaive(int amount)
             {
                 if (primes.Count == 0)
                 {
                     primes.Add(2);
+                    OnPrimeCalculated(2);
+                    nonprimes.Add(1);
                     amount--;
                 }
                 int lastprime = primes.Last();
@@ -60,16 +102,20 @@ namespace Coree.Classes.Math
 
                     for (int i = ToBeTestedPointer; (int)primes[i] <= sqrt; i++)
                     {
+                        System.Threading.Thread.Sleep(1);
                         ToBeTestedPointer = i;
                         if (toBeTested % primes[i] == 0)
                         {
                             isPrime = false;
+                            nonprimes.Add(toBeTested);
                             break;
                         }
                     }
                     if (isPrime)
                     {
                         primes.Add(toBeTested);
+                        OnPrimeCalculated(toBeTested);
+                
                         amount--;
                     }
                     ToBeTestedPointer = 0;
