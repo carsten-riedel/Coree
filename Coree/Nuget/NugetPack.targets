@@ -44,8 +44,10 @@ Nuget.key
     <Exec Command="dotnet nuget push &quot;$(NuGetDir)\$(ProjectName).$(VersionPrefix)$(VersionSuffix).nupkg&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
   </Target>
 
+
   <ItemGroup>
-    <None Update="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" />
+    <None Include="$(MSBuildThisFileDirectory)\README.md" Pack="true" PackagePath="\"/>
+    <None Include="$(MSBuildThisFileDirectory)init.ps1" Pack="true" PackagePath="tools\" />
   </ItemGroup>
   
 </Project>

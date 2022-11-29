@@ -50,10 +50,10 @@
     
     <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildThisFileDirectory)ReleaseNotes.txt"))</PackageReleaseNotes>
    
-    <PackageReadmeFile>Nuget\README.md</PackageReadmeFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <NoWarn>NU5128</NoWarn>
   </PropertyGroup>
 
-
+ 
 
 </Project>
