@@ -13,36 +13,71 @@ function GetProperty($properties, $propertyName)
     }
 }
 
-Write-Output "+++++++++++++++++++++++++++++++++++++++++++++++"
-Write-Output "init.ps1 called"
+function Display
+{
+  Param
+  (
+    [parameter(Mandatory=$true)][String] $NugetRootPackagePath,
+    [parameter(Mandatory=$true)][String] $NugetToolsPackagePath,
+    [parameter(Mandatory=$true)][NuGet.PackageManagement.VisualStudio.ScriptPackage] $packagex,
+    [parameter(Mandatory=$true)][Microsoft.VisualStudio.ProjectSystem.VS.Implementation.Package.Automation.OAProject] $EnvDTEproject
 
-Write-Output "InstallPath $installPath"
-Write-Output "ToolsPath $toolsPath"
-Write-Output "Package $package"
+  )
+    $solution = Get-Interface $dte.Solution ([EnvDTE80.Solution2])
+    
 
-Write-Output $project.GetType().FullName
-Write-Output $package.GetType().FullName
+        Write-Output "+++++++++++++++++++++++++++++++++++++++++++++++"
+        $ProjectFullPath = $EnvDTEproject.Properties.Item('FullPath').Value
+        $ProjectName = $EnvDTEproject.ProjectName
+        
+        Write-Output $EnvDTEproject.GetType().FullName
+        Write-Output $EnvDTEproject.GetType().FullName
+        Write-Output "NugetRootPackagePath $NugetRootPackagePath"
+        Write-Output "NugetToolsPackagePath $NugetToolsPackagePath"
+        Write-Output "ProjectName: $ProjectName"
+        Write-Output "ProjectFullPath: $ProjectFullPath"
 
-Write-Output "ProjectName: $($project.ProjectName)"
-$fpath = GetProperty $project.Properties 'FullPath'
-Write-Output "FullPath: $fpath"
+        Write-Host ($EnvDTEproject | Format-Table | Out-String)
+        Write-Host ($package | Format-Table | Out-String)
 
+        $solution | Get-Member  -Force
+        $EnvDTEproject | Get-Member  -Force
+        $package | Get-Member  -Force
 
-if (Test-Path -Path "$fpath\FolderPut") {
-    "Path exists!"
-} else {
-    $project.ProjectItems.AddFolder("FolderPut",$null) 
+        ConvertTo-Json $solution -Depth 2
+        ConvertTo-Json $EnvDTEproject -Depth 2
+        ConvertTo-Json $package -Depth 2
+
 }
 
-Copy-Item "$installPath\README.md" -Destination "$fpath\FolderPut"
+function Sample($NugetRootPackagePath, $NugetToolsPackagePath,$package,$EnvDTEproject)
+{
+    try
+    {
+        if (Test-Path -Path "$fpath\FolderPut") {
+            "Path exists!"
+        } else {
+            $project.ProjectItems.AddFolder("FolderPut",$null) 
+        }
 
-#$item.Properties.Item("ItemType").Value = "Content"
+        Copy-Item "$installPath\README.md" -Destination "$fpath\FolderPut"
+        $itemx = $project.ProjectItems.AddFromFile("$fpath\FolderPut\README.md");
+        $ppp = GetProperty $itemx.Properties 'BuildAction'
+        Write-Output "BuildAction $ppp"
+        $itemx.Properties.Item("ItemType").Value = "Content"
+    }
+    catch
+    {
+        return $null
+    }
+}
 
-$itemx = $project.ProjectItems.AddFromFile("$fpath\FolderPut\README.md");
-$ppp = GetProperty $itemx.Properties 'BuildAction'
 
-Write-Output "BuildAction $ppp"
+Display -NugetRootPackagePath $installPath -NugetToolsPackagePath $toolsPath -packagex $package -EnvDTEproject $project
 
-#$itemx.Properties.Item("BuildAction").Value = "Compile"
-$itemx.Properties.Item("ItemType").Value = "Content"
+
+
+
+
+
 
