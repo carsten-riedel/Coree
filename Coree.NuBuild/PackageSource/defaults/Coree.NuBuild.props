@@ -1,0 +1,46 @@
+﻿<Project>
+
+  <!-- https://learn.microsoft.com/en-us/nuget/reference/msbuild-targets#pack-target -->
+  <PropertyGroup>
+    <PackageId>$(AssemblyName)</PackageId>
+    
+    <VersionMajor>0</VersionMajor>
+    <VersionMinor>0</VersionMinor>
+    <VersionBuild>$([System.DateTime]::Now.ToString("yy").Substring(1,1))$([System.DateTime]::Now.ToString("MMdd").TrimStart('0'))</VersionBuild>
+    <VersionRevision>1$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</VersionRevision>
+    <VersionFull>$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</VersionFull>
+    <VersionPrefix>$(VersionFull)</VersionPrefix>
+    <VersionSuffix Condition="'$(Configuration)'=='Debug'">debug</VersionSuffix>
+    <VersionSuffix Condition="'$(Configuration)'=='Release'"></VersionSuffix>
+
+    <VersionMinus Condition="'$(VersionSuffix)'!=''">-</VersionMinus>
+    <VersionMinus Condition="'$(VersionSuffix)'==''"></VersionMinus>
+
+    <Title>$(AssemblyName)</Title>
+    <Description>Description</Description>
+    <Authors>Your Name</Authors>
+    <Copyright></Copyright>
+
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryBranch>develop</RepositoryBranch>
+
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>ICON.png</PackageIcon>
+
+    <PackageTags>Tags;Here</PackageTags>
+    
+    <NuBuildPropsRun>true</NuBuildPropsRun>
+    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Coree.NuBuild.Defaults\LICENSE.txt" Pack="true" PackagePath="\" />
+    <None Include="Coree.NuBuild.Defaults\ICON.png" Pack="true" PackagePath="\" />
+    <None Include="Coree.NuBuild.Defaults\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
