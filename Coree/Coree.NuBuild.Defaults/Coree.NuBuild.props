@@ -41,6 +41,7 @@ Coree Meta Package
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>ICON.png</PackageIcon>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
 
     <NuBuildPropsRun>true</NuBuildPropsRun>
     
