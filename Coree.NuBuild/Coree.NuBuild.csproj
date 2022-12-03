@@ -20,6 +20,8 @@
     <None Include="PackageSource\defaults\.gitignore" Pack="true" PackagePath="defaults\" />
     <None Include="PackageSource\defaults\NugetApi.Key" Pack="true" PackagePath="defaults\" />
     <None Include="PackageSource\defaults\ReleaseNotes.txt" Pack="true" PackagePath="defaults\" />
+    
+    <None Include="PackageSource\output\.gitignore" Pack="true" PackagePath="output\" />
   </ItemGroup>
 
   <!-- https://learn.microsoft.com/en-us/nuget/reference/msbuild-targets#pack-target -->
@@ -41,7 +43,9 @@
     <Title>Coree.NuBuild</Title>
     <Description>
     <![CDATA[
-Coree.NuBuild template for Visual Studio generation of nuget packages.
+Coree.NuBuild template for visual studio generation of nuget packages.
+Injects the foder Coree.NuBuild.Defaults in your project.
+The package build target will call dotnet pack with the values from Coree.NuBuild.props
 
 Edit the Coree.NuBuild.Defaults folder to publish your package.
 - Coree.NuBuild.props : Edit this file to set your nuget values.
@@ -62,6 +66,7 @@ Edit the Coree.NuBuild.Defaults folder to publish your package.
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>ICON.png</PackageIcon>
+    <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\PackageSource\root\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\PackageSource\root\ReleaseNotes.txt"))</PackageReleaseNotes>
 
     <PackageTags>Coree;NuBuild;Coree.NuBuild</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
@@ -77,6 +82,8 @@ Edit the Coree.NuBuild.Defaults folder to publish your package.
     <NuGetCopyDir>C:\temp</NuGetCopyDir>
     <NugetKey>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Nuget.key"))</NugetKey>
     <NugetKey>$(NugetKey.Trim())</NugetKey>
+
+    <NoWarn>NU5128</NoWarn>
 
   </PropertyGroup>
 

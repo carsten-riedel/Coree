@@ -1,0 +1,3 @@
+﻿V0.0
+- transitive edit to init.ps1
+- added creation of Coree.NuBuild.Output and default gitignore for nupkg to init.ps1
