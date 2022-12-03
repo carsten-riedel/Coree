@@ -17,16 +17,13 @@
     <VersionMinus Condition="'$(VersionSuffix)'==''"></VersionMinus>
 
     <Title>$(AssemblyName)</Title>
-    <Description>Description</Description>
-    <Authors>Your Name</Authors>
-    <Owners>Your Name</Owners>
-    <Copyright></Copyright>
-    <Copyright Condition="'$(Copyright)'==''">Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Authors)</Copyright>
-    <PackageTags>Tags;Here</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
-    <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\ReleaseNotes.txt"))</PackageReleaseNotes>
-    
+    <Description>Coree common services</Description>
+    <Authors>Carsten Riedel</Authors>
+    <Owners>Carsten Riedel</Owners>
+    <Copyright>Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Authors)</Copyright>
+
+    <PackageProjectUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree.Services</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/carsten-riedel/Coree</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryBranch>develop</RepositoryBranch>
 
@@ -35,7 +32,10 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>ICON.png</PackageIcon>
 
-    <NuBuildCopyFileShare>C:\temp</NuBuildCopyFileShare>
+    <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\ReleaseNotes.txt"))</PackageReleaseNotes>
+
+    <PackageTags>Coree;services;common</PackageTags>
+    
     <NuBuildPropsRun>true</NuBuildPropsRun>
     
   </PropertyGroup>

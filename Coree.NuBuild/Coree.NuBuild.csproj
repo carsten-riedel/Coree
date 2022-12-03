@@ -17,6 +17,9 @@
     <None Include="PackageSource\defaults\ICON.png" Pack="true" PackagePath="defaults\" />
     <None Include="PackageSource\defaults\LICENSE.txt" Pack="true" PackagePath="defaults\" />
     <None Include="PackageSource\defaults\Coree.NuBuild.props" Pack="true" PackagePath="defaults\" />
+    <None Include="PackageSource\defaults\.gitignore" Pack="true" PackagePath="defaults\" />
+    <None Include="PackageSource\defaults\NugetApi.Key" Pack="true" PackagePath="defaults\" />
+    <None Include="PackageSource\defaults\ReleaseNotes.txt" Pack="true" PackagePath="defaults\" />
   </ItemGroup>
 
   <!-- https://learn.microsoft.com/en-us/nuget/reference/msbuild-targets#pack-target -->
@@ -53,6 +56,7 @@
     <PackageTags>Coree;NuBuild;Coree.NuBuild</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
 
     <NugetVer>$(VersionPrefix)$(VersionDash)$(VersionSuffix)</NugetVer>
     <NugetFile>$(PackageId).$(NugetVer).nupkg</NugetFile>
@@ -63,7 +67,7 @@
     <NuGetCopyDir>C:\temp</NuGetCopyDir>
     <NugetKey>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Nuget.key"))</NugetKey>
     <NugetKey>$(NugetKey.Trim())</NugetKey>
-    
+
   </PropertyGroup>
 
 
