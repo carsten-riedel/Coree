@@ -1,25 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
  
   <PropertyGroup>
-    <Configurations>Debug;Release</Configurations>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UseWinforms>true</UseWinforms>
   </PropertyGroup>
   
-  <Import Project="Defaults.props" />
-  <Import Project="DisplayProperties.targets" />
-  <Import Project="Nuget\NugetPack.targets" />
-  <ItemGroup>
-    <None Remove="C:\base\github.com\carsten-riedel\Coree\Coree\Nuget\install.ps1" />
-    <None Remove="C:\base\github.com\carsten-riedel\Coree\Coree\Nuget\uninstall.ps1" />
-  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Coree.Classes" Version="1.22.1119.2040" />
-    <PackageReference Include="Coree.Controls" Version="1.22.1119.2054" />
-    <PackageReference Include="Coree.Extensions" Version="1.22.1119.2025" />
-    <PackageReference Include="Coree.Services" Version="1.22.1119.2025" />
+    <PackageReference Include="Coree.Classes" Version="0.0.21203.1830" />
+    <PackageReference Include="Coree.Controls" Version="0.0.21203.1900" />
+    <PackageReference Include="Coree.Extensions" Version="0.0.21203.1849" />
+    <PackageReference Include="Coree.NuBuild" Version="0.0.21203.1810">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Coree.Services" Version="0.0.21203.1815" />
   </ItemGroup>
 
 

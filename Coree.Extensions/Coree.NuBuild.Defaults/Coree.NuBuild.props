@@ -22,16 +22,16 @@
     <Title>$(AssemblyName)</Title>
     <Description>
     <![CDATA[
-Description as CDATA (fixes line break issues)
+Basic Coree Extensions methods.
 	]]>
     </Description>
-    <Authors>Your Name</Authors>
-    <Owners>Your Name</Owners>
+    <Authors>Carsten Riedel</Authors>
+    <Owners>Carsten Riedel</Owners>
     <Copyright></Copyright>
     <Copyright Condition="'$(Copyright)'==''">Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Authors)</Copyright>
-    <PackageTags>Tags;Here</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
+    <PackageTags>Coree;Extensions</PackageTags>
+    <PackageProjectUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree.Extensions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/carsten-riedel/Coree</RepositoryUrl>
     <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\ReleaseNotes.txt"))</PackageReleaseNotes>
     
     <RepositoryType>git</RepositoryType>
@@ -42,7 +42,6 @@ Description as CDATA (fixes line break issues)
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>ICON.png</PackageIcon>
 
-    <NuBuildCopyFileShare>C:\temp</NuBuildCopyFileShare>
     <NuBuildPropsRun>true</NuBuildPropsRun>
     
   </PropertyGroup>

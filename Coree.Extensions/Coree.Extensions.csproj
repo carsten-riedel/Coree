@@ -6,9 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
    </PropertyGroup>
-
-  <Import Project="Defaults.props" />
-  <Import Project="DisplayProperties.targets" />
-  <Import Project="Nuget\NugetPack.targets" />
+ 
+  <ItemGroup>
+    <PackageReference Include="Coree.NuBuild" Version="0.0.21203.1810">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>

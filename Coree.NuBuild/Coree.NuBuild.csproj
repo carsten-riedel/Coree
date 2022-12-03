@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -39,7 +39,17 @@
     <VersionDash Condition="'$(VersionSuffix)'!=''">-</VersionDash>
 
     <Title>Coree.NuBuild</Title>
-    <Description>Coree.NuBuild template for Visual Studio generation of nuget packages</Description>
+    <Description>
+    <![CDATA[
+Coree.NuBuild template for Visual Studio generation of nuget packages.
+
+Edit the Coree.NuBuild.Defaults folder to publish your package.
+- Coree.NuBuild.props : Edit this file to set your nuget values.
+- Coree.NuBuild.props : Edit NuBuildCopyFileShare to copy the package to a destination directory.
+- NugetApi.Key : If a key is set your package will be published. Debug=Prerelease
+- Edit/Change: ICON.png README.md ReleaseNotes.txt LICENSE.txt
+	]]>
+    </Description>
     <Authors>Carsten Riedel</Authors>
     <Copyright>Copyright (c) 2022 Carsten Riedel</Copyright>
 
@@ -48,7 +58,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryBranch>develop</RepositoryBranch>
 
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>ICON.png</PackageIcon>
@@ -69,7 +79,6 @@
     <NugetKey>$(NugetKey.Trim())</NugetKey>
 
   </PropertyGroup>
-
 
   <Target Name="NuBuildPack" AfterTargets="PostBuildEvent">
     <Message Text="ProjectName: $(ProjectName)" Importance="high" />
