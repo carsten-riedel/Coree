@@ -1,0 +1,5 @@
+﻿  <!-- https://learn.microsoft.com/en-us/nuget/reference/msbuild-targets -->
+  <!-- https://learn.microsoft.com/en-us/cpp/build/reference/common-macros-for-build-commands-and-properties?view=msvc-170 -->
+  <!-- https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-reserved-and-well-known-properties?view=vs-2022 -->
+  <!-- https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props -->
+  <!-- https://github.com/NuGet/NuGet.Client/blob/4.3.0.4202/src/NuGet.Core/NuGet.Build.Tasks.Pack.Library/Pack.targets -->

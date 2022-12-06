@@ -1,0 +1,106 @@
+﻿<Project>
+
+  <PropertyGroup Condition="'$(Coree-Nuspec-AutoGenVersion)'=='true'">
+    <Coree-Nuspec-VersionMajor Condition="'$(Coree-Nuspec-VersionMajor)'==''">0</Coree-Nuspec-VersionMajor>
+    <Coree-Nuspec-VersionMinor Condition="'$(Coree-Nuspec-VersionMinor)'==''">0</Coree-Nuspec-VersionMinor>
+    <Coree-Nuspec-VersionBuild Condition="'$(Coree-Nuspec-VersionBuild)'==''">$([System.DateTime]::Now.ToString("yy").Substring(1,1))$([System.DateTime]::Now.ToString("MMdd").TrimStart('0'))</Coree-Nuspec-VersionBuild>
+    <Coree-Nuspec-VersionRevision Condition="'$(Coree-Nuspec-VersionRevision)'==''">1$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</Coree-Nuspec-VersionRevision>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Coree-Nuspec-PreReleaseFromConfiguration)'=='true'">
+    <Coree-Nuspec-VersionSuffix Condition="'$(Configuration)'!='Release'">-$(Configuration)</Coree-Nuspec-VersionSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Coree-Nuspec-DefaultPackageOutputAbsolutePath)'=='true'">
+    <Coree-Nuspec-PackageOutputAbsolutePath Condition="'$(Coree-Nuspec-PackageOutputAbsolutePath)'==''">$(MSBuildProjectDirectory)\Coree.NuPack\Pack</Coree-Nuspec-PackageOutputAbsolutePath>
+  </PropertyGroup>
+
+  <Target Name="BeforeTargetsGenerateNuspecCalc" BeforeTargets="GenerateNuspec">
+    <Message Text=" "  Importance="high" />
+    <Message Text=" "  Importance="high" />
+    <Message Text="Coree.Nuspec ; from file $(MSBuildThisFile) ; BeforeTargetsGenerateNuspecCalc"  Importance="high" />
+    <Message Text="--------------------------------------------------------------------------------------"  Importance="high" />
+    
+    <!-- PropertyGroup need to be activated -->
+    <!-- Property needs to be checked if set otherwise it is an override. -->
+
+    <PropertyGroup Condition="'$(Coree-Nuspec-UseVersionForPackage)'=='true'">
+      <Coree-Nuspec-VersionPrefix>$(Coree-Nuspec-VersionMajor).$(Coree-Nuspec-VersionMinor).$(Coree-Nuspec-VersionBuild).$(Coree-Nuspec-VersionRevision)</Coree-Nuspec-VersionPrefix>
+      <VersionPrefix Condition="'$(Coree-Nuspec-VersionPrefix)'!=''">$(Coree-Nuspec-VersionPrefix)</VersionPrefix>
+      <VersionSuffix Condition="'$(Coree-Nuspec-VersionSuffix)'!=''">$(Coree-Nuspec-VersionSuffix)</VersionSuffix>
+      <Coree-Nuspec-PackageVersion>$(Coree-Nuspec-VersionPrefix)$(Coree-Nuspec-VersionSuffix)</Coree-Nuspec-PackageVersion>
+      <PackageVersion Condition="'$(Coree-Nuspec-PackageVersion)'!=''">$(Coree-Nuspec-PackageVersion)</PackageVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <PackageOutputAbsolutePath Condition="'$(Coree-Nuspec-PackageOutputAbsolutePath)'!=''">$(Coree-Nuspec-PackageOutputAbsolutePath)</PackageOutputAbsolutePath>
+    </PropertyGroup>
+
+  </Target>
+
+  <Target Name="BeforeTargetsBeforeBuildCalc" BeforeTargets="BeforeBuild">
+    
+    <PropertyGroup Condition="'$(Coree-Nuspec-UseVersionForAssembly)'=='true'">
+      <Coree-Nuspec-AssemblyVersion>$(Coree-Nuspec-VersionMajor).$(Coree-Nuspec-VersionMinor).$(Coree-Nuspec-VersionBuild).$(Coree-Nuspec-VersionRevision)</Coree-Nuspec-AssemblyVersion>
+      <AssemblyVersion Condition="'$(Coree-Nuspec-AssemblyVersion)'!=''">$(Coree-Nuspec-AssemblyVersion)</AssemblyVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Coree-Nuspec-UseVersionForFileVersion)'=='true'">
+      <Coree-Nuspec-FileVersion>$(Coree-Nuspec-VersionMajor).$(Coree-Nuspec-VersionMinor).$(Coree-Nuspec-VersionBuild).$(Coree-Nuspec-VersionRevision)</Coree-Nuspec-FileVersion>
+      <FileVersion Condition="'$(Coree-Nuspec-AssemblyVersion)'!=''">$(Coree-Nuspec-AssemblyVersion)</FileVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Coree-Nuspec-UseVersionForInformationalVersion)'=='true'">
+      <Coree-Nuspec-InformationalVersion>$(Coree-Nuspec-VersionMajor).$(Coree-Nuspec-VersionMinor).$(Coree-Nuspec-VersionBuild).$(Coree-Nuspec-VersionRevision)</Coree-Nuspec-InformationalVersion>
+      <InformationalVersion Condition="'$(Coree-Nuspec-InformationalVersion)'!=''">$(Coree-Nuspec-InformationalVersion)</InformationalVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <Copyright>me</Copyright>
+    </PropertyGroup>
+    
+  </Target>
+
+  <Target Name="AfterTargetsPack" AfterTargets="Pack">
+    <Message Text="+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"  Importance="high" />
+    <Message Text="+$(PackageOutputAbsolutePath)"  Importance="high" />
+    <Message Text="+$(PackageId).$(PackageVersion).nupkg"  Importance="high" />
+    <Message Text="+@(Coree-Nuspec-CopyShares)"  Importance="high" />
+    <Exec Command="dotnet nuget push &quot;$(PackageOutputAbsolutePath)\$(PackageId).$(PackageVersion).nupkg&quot; -k $(Coree-Nuspec-NugetApiKey) -s https://api.nuget.org/v3/index.json"  Condition="'$(Coree-Nuspec-NugetApiKey)'!=''" />
+    <Exec Command="dotnet nuget push &quot;$(PackageOutputAbsolutePath)\$(PackageId).$(PackageVersion).nupkg&quot; -k $(Coree-Nuspec-NugetApiKeyTest) -s https://apiint.nugettest.org/v3/index.json"  Condition="'$(Coree-Nuspec-NugetApiKeyTest)'!=''" />
+  </Target>
+
+  <Target Name="AfterTargetsPack" AfterTargets="Pack" Outputs="%(Coree-Nuspec-CopyShares.Identity)">
+    <Message Text="Coree-Nuspec-CopyShares.Identity: %(Coree-Nuspec-CopyShares.Identity)" Importance="high" />
+    <Copy SourceFiles="$(PackageOutputAbsolutePath)\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="@(Coree-Nuspec-CopyShares)" Condition="'@(Coree-Nuspec-CopyShares->Count())' &gt;= 1" />
+  </Target>
+
+  <Target Name="DisplayCoreeNuspecVars" BeforeTargets="GenerateNuspec">
+    <Message Text=" "  Importance="high" />
+    <Message Text=" "  Importance="high" />
+    <Message Text="Coree.Nuspec File: $(MSBuildThisFile)"  Importance="high" />
+    <Message Text="-----------------------------------------"  Importance="high" />
+    <Message Text="Coree-Nuspec-VersionPrefix:  $(Coree-Nuspec-VersionPrefix)"  Importance="high" />
+    <Message Text="Coree-Nuspec-VersionSuffix:  $(Coree-Nuspec-VersionSuffix)"  Importance="high" />
+    <Message Text="Coree-Nuspec-PackageVersion: $(Coree-Nuspec-PackageVersion)"  Importance="high" />
+    <Message Text="Coree-Nuspec-PackageOutputAbsolutePath: $(Coree-Nuspec-PackageOutputAbsolutePath)"  Importance="high" />
+    <Message Text=" "  Importance="high" />
+  </Target>
+
+  <Target Name="BeforeGenerateNuspecDisplay1" BeforeTargets="GenerateNuspec">
+    <Message Text=" "  Importance="high" />
+    <Message Text=" "  Importance="high" />
+    <Message Text="Coree.Nuspec: $(MSBuildThisFile)"  Importance="high" />
+    <Message Text="-----------------------------------------"  Importance="high" />
+    <Message Text="PackageId:          $(PackageId)"  Importance="high" />
+    <Message Text="PackageVersion:     $(PackageVersion)"  Importance="high" />
+    <Message Text="VersionPrefix:      $(VersionPrefix)"  Importance="high" />
+    <Message Text="VersionSuffix:      $(VersionSuffix)"  Importance="high" />
+    <Message Text="PackageOutputPath:  $(PackageOutputPath)"  Importance="high" />
+    <Message Text="OutputPath:         $(OutputPath)"  Importance="high" />
+    <Message Text="PackageOutputAbsolutePath:  $(PackageOutputAbsolutePath)"  Importance="high" />
+    <Message Text="Coree-Nuspec-VersionBuild:  $(Coree-Nuspec-VersionBuild)"  Importance="high" />
+    <Message Text=" "  Importance="high" />
+  </Target>
+
+</Project>

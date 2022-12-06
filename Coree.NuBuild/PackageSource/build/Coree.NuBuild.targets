@@ -8,23 +8,40 @@
   </Target>
 
   <Import Project="$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\Coree.NuBuild.props"  Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\Coree.NuBuild.props')"/>
-   
-  <Target Name="NuBuildPackTarget" AfterTargets="PostBuildEvent" Condition="'$(NuBuildPropsRun)'=='true'">
-    <Message Text="Custom Pack command .." Importance="high" />
-    <Message Text="ProjectName: $(ProjectName)" Importance="high" />
+
+  <Target Name="NuBuildDoPackPush" AfterTargets="PostBuildEvent;Pack">
+    <PropertyGroup>
+      <SolutionIsProject Condition="'$(SolutionName)'=='$(ProjectName)'">true</SolutionIsProject>
+      <IsProjectOnly Condition="'$(SolutionName)'==''">true</IsProjectOnly>
+      <ShouldPackPush Condition="'$(IsProjectOnly)'=='true' OR '$(SolutionIsProject)'=='true'">true</ShouldPackPush>
+      <DoPackPush Condition="'$(ShouldPackPush)'=='true' AND '$(NuBuildPropsRun)'=='true'">true</DoPackPush>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="NuBuildDoPackPushPrint" AfterTargets="PostBuildEvent">
+    <Message Text="SolutionIsProject: $(SolutionIsProject)" Importance="high" />
+    <Message Text="IsProjectOnly:     $(IsProjectOnly)" Importance="high" />
+    <Message Text="ShouldPackPush:    $(ShouldPackPush)" Importance="high" />
+    <Message Text="NuBuildPropsRun:   $(NuBuildPropsRun)" Importance="high" />
+    <Message Text="DoPackPush:        $(DoPackPush)" Importance="high" />
+  </Target>
+    
+  <Target Name="NuBuildPackTarget" AfterTargets="PostBuildEvent" Condition="'$(DoPackPush)'=='true'">
+    <Message Text="Coree.NuBuild: dotnet pack command ..." Importance="high" />
     <Exec Command="dotnet pack -p:PackageVersion=$(VersionPrefix)$(VersionMinus)$(VersionSuffix) --no-build --configuration $(Configuration) --output &quot;$(MSBuildProjectDirectory)\Coree.NuBuild.Output&quot;" />
   </Target>
   
-   <Target Name="NuBuildPackCopyTarget" AfterTargets="Pack" Condition="'$(NuBuildPropsRun)'=='true' AND '$(NuBuildCopyFileShare)'!=''">
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\Coree.NuBuild.Output\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(NuBuildCopyFileShare)" />
+   <Target Name="NuBuildPackCopyTarget" AfterTargets="Pack" Condition="'$(DoPackPush)'=='true' AND '$(NuBuildCopyFileShare)'!=''">
+     <Message Text="Coree.NuBuild: copy to $(NuBuildCopyFileShare) command ..." Importance="high" />
+     <Copy SourceFiles="$(MSBuildProjectDirectory)\Coree.NuBuild.Output\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="$(NuBuildCopyFileShare)" />
   </Target>
 
-
-  <Target Name="NuBuildPushTarget" AfterTargets="Pack" Condition="'$(NuBuildPropsRun)'=='true' AND Exists('$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\NugetApi.Key')">
+  <Target Name="NuBuildPushTarget" AfterTargets="Pack" Condition="'$(DoPackPush)'=='true' AND Exists('$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\NugetApi.Key')">
     <PropertyGroup>
       <NugetApiValue>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Coree.NuBuild.Defaults\NugetApi.Key"))</NugetApiValue>
       <NugetApiValue>$(NugetApiValue.Trim())</NugetApiValue>
     </PropertyGroup>
+    <Message Text="Coree.NuBuild: dotnet nuget push command..." Importance="high" />
     <Exec Command="dotnet nuget push &quot;$(MSBuildProjectDirectory)\Coree.NuBuild.Output\$(PackageId).$(PackageVersion).nupkg&quot; -k $(NugetApiValue) -s https://api.nuget.org/v3/index.json"  Condition="'$(NugetApiValue)'!=''" />
   </Target>
 

@@ -1,0 +1,9 @@
+<Project>
+
+  <Import Project="$(MSBuildProjectDirectory)\Coree.NuPack\Config\Nuspec.Secrets.props"  Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuPack\Config\Nuspec.Secrets.props')"/>
+  <Import Project="$(MSBuildProjectDirectory)\Coree.NuPack\Config\Nuspec.Constants.props"  Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuPack\Config\Nuspec.Constants.props')"/>
+  <Import Project="$(MSBuildProjectDirectory)\Coree.NuPack\Config\Nuspec.Edit.props"  Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuPack\Config\Nuspec.Edit.props')"/>
+  
+  <Import Project="$(MSBuildThisFileDirectory)Coree.NuPack.Process.targets"  Condition="Exists('$(MSBuildThisFileDirectory)Coree.NuPack.Process.targets')"/>
+
+</Project>

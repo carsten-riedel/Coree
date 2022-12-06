@@ -1,0 +1,24 @@
+﻿<Project>
+
+  <PropertyGroup>
+
+    <Authors></Authors>
+    <Copyright></Copyright>
+    <Description>
+      <![CDATA[
+Coree.NuPack base
+	]]>
+    </Description>
+    <PackageTags></PackageTags>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <RepositoryType></RepositoryType>
+    <RepositoryBranch></RepositoryBranch>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Coree-Nuspec-CopyShares Include="C:\temp" />
+  </ItemGroup>
+
+</Project>

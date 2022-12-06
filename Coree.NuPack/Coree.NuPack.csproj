@@ -5,29 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="PackageSource\root\LICENSE.txt" Pack="true" PackagePath="\" />
-    <None Include="PackageSource\root\ICON.png" Pack="true" PackagePath="\" />
-    <None Include="PackageSource\root\README.md" Pack="true" PackagePath="\" />
-    <None Include="PackageSource\tools\init.ps1" Pack="true" PackagePath="tools\" />
-    <None Include="PackageSource\build\Coree.NuBuild.targets" Pack="true" PackagePath="build\" />
-
-    <None Include="PackageSource\defaults\README.md" Pack="true" PackagePath="defaults\" />
-    <None Include="PackageSource\defaults\ICON.png" Pack="true" PackagePath="defaults\" />
-    <None Include="PackageSource\defaults\LICENSE.txt" Pack="true" PackagePath="defaults\" />
-    <None Include="PackageSource\defaults\Coree.NuBuild.props" Pack="true" PackagePath="defaults\" />
-    <None Include="PackageSource\defaults\.gitignore" Pack="true" PackagePath="defaults\" />
-    <None Include="PackageSource\defaults\NugetApi.Key" Pack="true" PackagePath="defaults\" />
-    <None Include="PackageSource\defaults\ReleaseNotes.txt" Pack="true" PackagePath="defaults\" />
-    
-    <None Include="PackageSource\output\.gitignore" Pack="true" PackagePath="output\" />
-  </ItemGroup>
-
-  <!-- https://learn.microsoft.com/en-us/nuget/reference/msbuild-targets#pack-target -->
+  
   <PropertyGroup>
-
-    <PackageId>Coree.NuBuild</PackageId>
+    <PackageId>Coree.NuPack</PackageId>
 
     <VersionMajor>0</VersionMajor>
     <VersionMinor>0</VersionMinor>
@@ -40,19 +20,10 @@
 
     <VersionDash Condition="'$(VersionSuffix)'!=''">-</VersionDash>
 
-    <Title>Coree.NuBuild</Title>
+    <Title>Coree.NuPack</Title>
     <Description>
-    <![CDATA[
-Coree.NuBuild template for visual studio generation of nuget packages.
-Injects the foder Coree.NuBuild.Defaults in your project.
-The package build target will call dotnet pack with the values from Coree.NuBuild.props.
-Only works if SolutionName is ProjectName or SolutionName is empty.(To prevent publish as reference)
-
-Edit the Coree.NuBuild.Defaults folder to publish your package.
-- Coree.NuBuild.props : Edit this file to set your nuget values.
-- Coree.NuBuild.props : Edit NuBuildCopyFileShare to copy the package to a destination directory.
-- NugetApi.Key : If a key is set your package will be published. Debug=Prerelease
-- Edit/Change: ICON.png README.md ReleaseNotes.txt LICENSE.txt
+      <![CDATA[
+Coree.NuPack base
 	]]>
     </Description>
     <Authors>Carsten Riedel</Authors>
@@ -69,23 +40,28 @@ Edit the Coree.NuBuild.Defaults folder to publish your package.
     <PackageIcon>ICON.png</PackageIcon>
     <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\PackageSource\root\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\PackageSource\root\ReleaseNotes.txt"))</PackageReleaseNotes>
 
-    <PackageTags>Coree;NuBuild;Coree.NuBuild</PackageTags>
+    <PackageTags>Coree;Coree.NuPack;NuPack</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NoDefaultExcludes>true</NoDefaultExcludes>
 
     <NugetVer>$(VersionPrefix)$(VersionDash)$(VersionSuffix)</NugetVer>
     <NugetFile>$(PackageId).$(NugetVer).nupkg</NugetFile>
-    
+
     <NuGetDirOut>$(MSBuildProjectDirectory)\PackageOutput</NuGetDirOut>
     <NuGetDirOutFile>$(NuGetDirOut)\$(NugetFile)</NuGetDirOutFile>
-    
-    <NuGetCopyDir>C:\temp</NuGetCopyDir>
-    <NugetKey>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Nuget.key"))</NugetKey>
-    <NugetKey>$(NugetKey.Trim())</NugetKey>
-    <NoWarn>NU5128</NoWarn>
 
+    <NuGetCopyDir>C:\temp</NuGetCopyDir>
+    <NugetKey Condition="Exists('$(MSBuildProjectDirectory)\Nuget.key')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Nuget.key"))</NugetKey>
+    <NugetKey>$(NugetKey.Trim())</NugetKey>
+    
+    <NoWarn>NU5128</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Content\**" Pack="true" PackagePath="\"/>
+    <None Include="This\*" Pack="true" PackagePath="\" Exclude="ReleaseNotes.txt"/>
+  </ItemGroup>
 
   <Target Name="NuBuildPack" AfterTargets="PostBuildEvent">
     <Message Text="ProjectName: $(ProjectName)" Importance="high" />
@@ -99,6 +75,5 @@ Edit the Coree.NuBuild.Defaults folder to publish your package.
   <Target Name="NuBuildPush" AfterTargets="PostBuildEvent" Condition="'$(NuGetDirOutFile)'!='' AND '$(NugetKey)'!=''">
     <Exec Command="dotnet nuget push &quot;$(NuGetDirOutFile)&quot; -k $(NugetKey) -s https://api.nuget.org/v3/index.json" />
   </Target>
-
 
 </Project>
