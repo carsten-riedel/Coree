@@ -42,6 +42,7 @@ Basic Coree controls (overrides)
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>ICON.png</PackageIcon>
 
+    <NuBuildCopyFileShare>C:\temp</NuBuildCopyFileShare>
     <NuBuildPropsRun>true</NuBuildPropsRun>
     
   </PropertyGroup>

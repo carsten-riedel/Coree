@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
@@ -8,7 +10,7 @@ namespace Coree.Controls
     public class CoreeRichTextBox : RichTextBox
     {
 
-        [DefaultValue(typeof(Font), "Consolas, 12pt")]
+        [DefaultValue(typeof(Font), "Consolas, 11pt")]
         public override Font Font
         {
             get { return base.Font; }
@@ -59,13 +61,20 @@ namespace Coree.Controls
             this.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.WordWrap = false;
             this.ScrollBars = RichTextBoxScrollBars.ForcedVertical;
-            this.Font = new Font(new FontFamily("Consolas"), 12, FontStyle.Regular, GraphicsUnit.Point);
+            this.Font = new Font(new FontFamily("Consolas"), 11, FontStyle.Regular, GraphicsUnit.Point);
         }
 
 
-        public void AppendLine(string text,bool ScrollToEnd = true)
+        public void AppendLine(string text,Color? color = null,bool ScrollToEnd = true)
         {
-            base.AppendText($@"{text}{Environment.NewLine}");
+            if (color == null)
+            {
+                color = base.ForeColor;
+            }
+            base.SelectionColor = color.Value;
+            base.AppendText($@"{text}");
+            base.SelectionColor = base.ForeColor;
+            base.AppendText($@"{Environment.NewLine}");
             base.SelectionStart = base.Text.Length;
             // scroll it automatically
             base.ScrollToCaret();

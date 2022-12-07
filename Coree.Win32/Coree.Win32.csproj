@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+    <None Remove="C:\base\github.com\carsten-riedel\Coree\Coree.Win32\Coree.NuPack\Config\LICENSE.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\base\github.com\carsten-riedel\Coree\Coree.Win32\Coree.NuPack\Config\ICON.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\base\github.com\carsten-riedel\Coree\Coree.Win32\Coree.NuPack\Config\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\base\github.com\carsten-riedel\Coree\Coree.Win32\Coree.NuPack\Config\LICENSE.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\base\github.com\carsten-riedel\Coree\Coree.Win32\Coree.NuPack\Config\ICON.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\base\github.com\carsten-riedel\Coree\Coree.Win32\Coree.NuPack\Config\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Coree.NuPack" Version="0.0.21207.1732">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  
+  <!-- https://learn.microsoft.com/en-us/nuget/reference/msbuild-targets -->
+  <!-- https://learn.microsoft.com/en-us/cpp/build/reference/common-macros-for-build-commands-and-properties?view=msvc-170 -->
+  <!-- https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-reserved-and-well-known-properties?view=vs-2022 -->
+  <!-- https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props -->
+  <!-- https://github.com/NuGet/NuGet.Client/blob/4.3.0.4202/src/NuGet.Core/NuGet.Build.Tasks.Pack.Library/Pack.targets -->
+  
+
+  
+</Project>

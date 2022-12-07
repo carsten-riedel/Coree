@@ -1,1 +1,1 @@
-﻿
+﻿- built with new variant of Coree.NuBuild

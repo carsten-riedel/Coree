@@ -6,7 +6,7 @@
     <Copyright></Copyright>
     <Description>
       <![CDATA[
-Coree.NuPack base
+Package Description
 	]]>
     </Description>
     <PackageTags></PackageTags>
@@ -14,6 +14,9 @@ Coree.NuPack base
     <RepositoryUrl></RepositoryUrl>
     <RepositoryType></RepositoryType>
     <RepositoryBranch></RepositoryBranch>
+
+    <Coree-Nuspec-AutoAuthors>true</Coree-Nuspec-AutoAuthors>
+    <Coree-Nuspec-AutoCopyrightAuthors>true</Coree-Nuspec-AutoCopyrightAuthors>
 
   </PropertyGroup>
 

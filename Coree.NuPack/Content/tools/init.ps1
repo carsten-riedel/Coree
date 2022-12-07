@@ -15,6 +15,13 @@ Write-Output "ToolsPath:      $toolsPath"
 Write-Output "ProjectName:    $projectName"
 Write-Output "ProjectPath:    $projectPath"
 
+$path = "$projectPath\Coree.NuPack.Nupkg"
+If(!(test-path -PathType container $path))
+{
+      New-Item -ItemType Directory -Path $path
+}
+
+Copy-Item (Join-Path "$installPath\Coree.NuPack.Nupkg" "*") "$path" -Exclude (Get-ChildItem "$path") -verbose
 
 $path = "$projectPath\Coree.NuPack"
 If(!(test-path -PathType container $path))
@@ -22,19 +29,4 @@ If(!(test-path -PathType container $path))
       New-Item -ItemType Directory -Path $path
 }
 
-$path = "$projectPath\Coree.NuPack\Config"
-If(!(test-path -PathType container $path))
-{
-      New-Item -ItemType Directory -Path $path
-}
-
-Copy-Item (Join-Path "$installPath\Coree.NuPack\Config" "*") "$path" -Exclude (Get-ChildItem "$path") -verbose
-
-$path = "$projectPath\Coree.NuPack\Pack"
-If(!(test-path -PathType container $path))
-{
-      New-Item -ItemType Directory -Path $path
-}
-
-
-Copy-Item (Join-Path "$installPath\Coree.NuPack\Pack" "*") "$path" -Exclude (Get-ChildItem "$path") -verbose
+Copy-Item (Join-Path "$installPath\Coree.NuPack" "*") "$path" -Exclude (Get-ChildItem "$path") -verbose

@@ -8,11 +8,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Coree-Nuspec-PreReleaseFromConfiguration)'=='true'">
-    <Coree-Nuspec-VersionSuffix Condition="'$(Configuration)'!='Release'">-$(Configuration)</Coree-Nuspec-VersionSuffix>
+    <Coree-Nuspec-Configuration>$(Configuration)</Coree-Nuspec-Configuration>
+    <Coree-Nuspec-VersionSuffix Condition="'$(Configuration)'!='Release'">-$(Coree-Nuspec-Configuration.ToLower())</Coree-Nuspec-VersionSuffix>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Coree-Nuspec-DefaultPackageOutputAbsolutePath)'=='true'">
-    <Coree-Nuspec-PackageOutputAbsolutePath Condition="'$(Coree-Nuspec-PackageOutputAbsolutePath)'==''">$(MSBuildProjectDirectory)\Coree.NuPack\Pack</Coree-Nuspec-PackageOutputAbsolutePath>
+    <Coree-Nuspec-PackageOutputAbsolutePath Condition="'$(Coree-Nuspec-PackageOutputAbsolutePath)'==''">$(MSBuildProjectDirectory)\Coree.NuPack.Nupkg</Coree-Nuspec-PackageOutputAbsolutePath>
   </PropertyGroup>
 
   <Target Name="BeforeTargetsGenerateNuspecCalc" BeforeTargets="GenerateNuspec">
@@ -55,9 +56,14 @@
       <InformationalVersion Condition="'$(Coree-Nuspec-InformationalVersion)'!=''">$(Coree-Nuspec-InformationalVersion)</InformationalVersion>
     </PropertyGroup>
 
-    <PropertyGroup>
-      <Copyright>me</Copyright>
+    <PropertyGroup Condition="'$(Coree-Nuspec-AutoAuthors)'=='true'">
+      <Authors Condition="'$(Authors)'==''">$(USERNAME)</Authors>
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Coree-Nuspec-AutoCopyrightAuthors)'=='true'">
+      <Copyright Condition="'$(Copyright)'==''">Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Authors)</Copyright>
+    </PropertyGroup>
+
     
   </Target>
 

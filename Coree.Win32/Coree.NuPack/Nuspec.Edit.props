@@ -1,19 +1,23 @@
 ﻿<Project>
 
   <PropertyGroup>
+
     <Authors></Authors>
     <Copyright></Copyright>
     <Description>
       <![CDATA[
-
+Coree.NuPack base
 	]]>
     </Description>
-
+    <PackageTags></PackageTags>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl></RepositoryUrl>
     <RepositoryType></RepositoryType>
     <RepositoryBranch></RepositoryBranch>
-    
+
+    <Coree-Nuspec-AutoAuthors>true</Coree-Nuspec-AutoAuthors>
+    <Coree-Nuspec-AutoCopyrightAuthors>true</Coree-Nuspec-AutoCopyrightAuthors>
+
   </PropertyGroup>
 
   <ItemGroup>

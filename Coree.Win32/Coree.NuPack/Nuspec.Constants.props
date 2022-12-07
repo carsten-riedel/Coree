@@ -6,7 +6,7 @@
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>ICON.png</PackageIcon>
-    <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuPack\Config\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Coree.NuPack\Config\ReleaseNotes.txt"))</PackageReleaseNotes>
+    <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuPack\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Coree.NuPack\ReleaseNotes.txt"))</PackageReleaseNotes>
     
     <Coree-Nuspec-AutoGenVersion>true</Coree-Nuspec-AutoGenVersion>
 
@@ -18,7 +18,7 @@
     <Coree-Nuspec-PreReleaseFromConfiguration>true</Coree-Nuspec-PreReleaseFromConfiguration>
 
     <Coree-Nuspec-DefaultPackageOutputAbsolutePath>true</Coree-Nuspec-DefaultPackageOutputAbsolutePath>
-
+    
 
 
 
@@ -26,9 +26,7 @@
 
 
   <ItemGroup>
-    <None Include="$(MSBuildProjectDirectory)\Coree.NuPack\Config\LICENSE.txt" Pack="true" PackagePath="\" />
-    <None Include="$(MSBuildProjectDirectory)\Coree.NuPack\Config\ICON.png" Pack="true" PackagePath="\" />
-    <None Include="$(MSBuildProjectDirectory)\Coree.NuPack\Config\README.md" Pack="true" PackagePath="\" />
+    <None Include="$(MSBuildProjectDirectory)\Coree.NuPack\*" Pack="true" PackagePath="\" Exclude="$(MSBuildProjectDirectory)\Coree.NuPack\Nuspec.Constants.props;$(MSBuildProjectDirectory)\Coree.NuPack\Nuspec.Edit.props;$(MSBuildProjectDirectory)\Coree.NuPack\Nuspec.Secrets.props;$(MSBuildProjectDirectory)\Coree.NuPack\ReleaseNotes.txt" />
   </ItemGroup>
   
 </Project>
