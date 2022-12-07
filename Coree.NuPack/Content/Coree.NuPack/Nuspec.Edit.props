@@ -2,6 +2,9 @@
 
   <PropertyGroup>
 
+    <Coree-Nuspec-VersionMajor>0</Coree-Nuspec-VersionMajor>
+    <Coree-Nuspec-VersionMinor>1</Coree-Nuspec-VersionMinor>
+
     <Authors></Authors>
     <Copyright></Copyright>
     <Description>

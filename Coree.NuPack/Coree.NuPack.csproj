@@ -38,7 +38,7 @@ Coree.NuPack base
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>ICON.png</PackageIcon>
-    <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\PackageSource\root\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\PackageSource\root\ReleaseNotes.txt"))</PackageReleaseNotes>
+    <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\This\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\This\ReleaseNotes.txt"))</PackageReleaseNotes>
 
     <PackageTags>Coree;Coree.NuPack;NuPack</PackageTags>
     <DevelopmentDependency>true</DevelopmentDependency>
