@@ -26,7 +26,7 @@
 
 
   <ItemGroup>
-    <None Include="$(MSBuildProjectDirectory)\Coree.NuPack\*" Pack="true" PackagePath="\" Exclude="$(MSBuildProjectDirectory)\Coree.NuPack\Nuspec.Constants.props;$(MSBuildProjectDirectory)\Coree.NuPack\Nuspec.Edit.props;$(MSBuildProjectDirectory)\Coree.NuPack\Nuspec.Secrets.props;$(MSBuildProjectDirectory)\Coree.NuPack\ReleaseNotes.txt" />
+    <None Include="$(MSBuildProjectDirectory)\Coree.NuPack\*" Pack="true" PackagePath="\" Exclude="$(MSBuildProjectDirectory)\Coree.NuPack\Nuspec.Constants.props;$(MSBuildProjectDirectory)\Coree.NuPack\Nuspec.Edit.props;$(MSBuildProjectDirectory)\Coree.NuPack\Nuspec.Secrets.props;$(MSBuildProjectDirectory)\Coree.NuPack\ReleaseNotes.txt;$(MSBuildProjectDirectory)\Coree.NuPack\.gitignore" />
   </ItemGroup>
   
 </Project>
