@@ -1,0 +1,30 @@
+﻿<Project>
+
+  <PropertyGroup>
+
+    <Coree-Nuspec-VersionMajor>0</Coree-Nuspec-VersionMajor>
+    <Coree-Nuspec-VersionMinor>1</Coree-Nuspec-VersionMinor>
+
+    <Authors>Carsten Riedel</Authors>
+    <Copyright></Copyright>
+    <Description>
+      <![CDATA[
+Package Description
+	]]>
+    </Description>
+    <PackageTags></PackageTags>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <RepositoryType></RepositoryType>
+    <RepositoryBranch></RepositoryBranch>
+
+    <Coree-Nuspec-AutoAuthors>true</Coree-Nuspec-AutoAuthors>
+    <Coree-Nuspec-AutoCopyrightAuthors>true</Coree-Nuspec-AutoCopyrightAuthors>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Coree-Nuspec-CopyShares Include="C:\temp" />
+  </ItemGroup>
+
+</Project>
