@@ -1,0 +1,47 @@
+﻿<Project>
+
+  <!-- https://learn.microsoft.com/en-us/nuget/reference/msbuild-targets -->
+  <!-- https://learn.microsoft.com/en-us/cpp/build/reference/common-macros-for-build-commands-and-properties?view=msvc-170 -->
+  <!-- https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-reserved-and-well-known-properties?view=vs-2022 -->
+  <!-- https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props -->
+  <!-- https://github.com/NuGet/NuGet.Client/blob/4.3.0.4202/src/NuGet.Core/NuGet.Build.Tasks.Pack.Library/Pack.targets -->
+  
+  <PropertyGroup>
+
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>ICON.png</PackageIcon>
+    <PackageReleaseNotes Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuPack\ReleaseNotes.txt')">$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)\Coree.NuPack\ReleaseNotes.txt"))</PackageReleaseNotes>
+    
+    <!-- Generate Coree-NuPack-VersionMajor Coree-NuPack-VersionMinor Coree-NuPack-VersionBuild Coree-NuPack-VersionRevision -->
+    <Coree-NuPack-AutoGenVersion>true</Coree-NuPack-AutoGenVersion>
+
+    <!-- Uses Coree-NuPack-Version* for package and Assembly -->
+    <Coree-NuPack-UseVersionForPackage>true</Coree-NuPack-UseVersionForPackage>
+    <Coree-NuPack-UseVersionForAssembly>true</Coree-NuPack-UseVersionForAssembly>
+    <Coree-NuPack-UseVersionForFileVersion>true</Coree-NuPack-UseVersionForFileVersion>
+    <Coree-NuPack-UseVersionForInformationalVersion>true</Coree-NuPack-UseVersionForInformationalVersion>
+
+    <!-- Uses $(Configuration) for prerelease suffix. Release configuration is release -->
+    <Coree-NuPack-PreReleaseFromConfiguration>true</Coree-NuPack-PreReleaseFromConfiguration>
+    
+    <!-- Drops packages to project directory folder Coree.NuPack.Nupkg -->
+    <Coree-NuPack-DefaultPackageOutputAbsolutePath>true</Coree-NuPack-DefaultPackageOutputAbsolutePath>
+
+    <!-- Push the package to nuget.org or nugettest.org if a key is set. -->
+    <Coree-NuPack-PushOnPackIfKeyIsSet>true</Coree-NuPack-PushOnPackIfKeyIsSet>
+ 
+  </PropertyGroup>
+
+  <!-- Put constant values from the edit.props here -->
+  <PropertyGroup>
+
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <None Include="$(MSBuildProjectDirectory)\Coree.NuPack\*" Pack="true" PackagePath="\" Exclude="$(MSBuildProjectDirectory)\Coree.NuPack\NuPack.Constants.props;$(MSBuildProjectDirectory)\Coree.NuPack\NuPack.Edit.props;$(MSBuildProjectDirectory)\Coree.NuPack\NuPack.Secrets.props;$(MSBuildProjectDirectory)\Coree.NuPack\ReleaseNotes.txt;$(MSBuildProjectDirectory)\Coree.NuPack\.gitignore" />
+  </ItemGroup>
+  
+</Project>

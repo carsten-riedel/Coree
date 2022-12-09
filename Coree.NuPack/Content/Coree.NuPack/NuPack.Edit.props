@@ -8,8 +8,8 @@
 
   <PropertyGroup>
 
-    <Coree-Nuspec-VersionMajor>0</Coree-Nuspec-VersionMajor>
-    <Coree-Nuspec-VersionMinor>1</Coree-Nuspec-VersionMinor>
+    <Coree-NuPack-VersionMajor>0</Coree-NuPack-VersionMajor>
+    <Coree-NuPack-VersionMinor>1</Coree-NuPack-VersionMinor>
     
     <Authors></Authors>
     <Copyright></Copyright>
@@ -26,21 +26,21 @@ Package Description
     <RepositoryBranch></RepositoryBranch>
 
     <!-- Uses Enviroment Username for <Authors> if <Authors> is not set. -->
-    <Coree-Nuspec-AutoAuthors>true</Coree-Nuspec-AutoAuthors>
+    <Coree-NuPack-AutoAuthors>true</Coree-NuPack-AutoAuthors>
 
     <!-- Uses <Authors> for <Company> if <Company> is not set. -->
-    <Coree-Nuspec-AutoCompany>true</Coree-Nuspec-AutoCompany>
+    <Coree-NuPack-AutoCompany>true</Coree-NuPack-AutoCompany>
 
     <!-- Uses <Company> for <Authors> if <Company> is set. -->
-    <Coree-Nuspec-UseCompanyAuthors>true</Coree-Nuspec-UseCompanyAuthors>
+    <Coree-NuPack-UseCompanyAuthors>true</Coree-NuPack-UseCompanyAuthors>
 
     <!-- Uses <Company> for the <Copyright> if <Copyright> is not set and <Company> is set. Copyright © YYYY $(Company) -->
-    <Coree-Nuspec-AutoCopyright>true</Coree-Nuspec-AutoCopyright>
+    <Coree-NuPack-AutoCopyright>true</Coree-NuPack-AutoCopyright>
 
   </PropertyGroup>
 
   <ItemGroup>
-    <Coree-Nuspec-CopyShares Include="C:\temp" />
+    <Coree-NuPack-CopyShares Include="C:\temp" />
   </ItemGroup>
 
 </Project>
