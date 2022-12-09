@@ -55,15 +55,22 @@
       <Coree-Nuspec-InformationalVersion>$(Coree-Nuspec-VersionMajor).$(Coree-Nuspec-VersionMinor).$(Coree-Nuspec-VersionBuild).$(Coree-Nuspec-VersionRevision)</Coree-Nuspec-InformationalVersion>
       <InformationalVersion Condition="'$(Coree-Nuspec-InformationalVersion)'!=''">$(Coree-Nuspec-InformationalVersion)</InformationalVersion>
     </PropertyGroup>
-
+    
     <PropertyGroup Condition="'$(Coree-Nuspec-AutoAuthors)'=='true'">
       <Authors Condition="'$(Authors)'==''">$(USERNAME)</Authors>
     </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Coree-Nuspec-AutoCopyrightAuthors)'=='true'">
-      <Copyright Condition="'$(Copyright)'==''">Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Authors)</Copyright>
+    
+    <PropertyGroup Condition="'$(Coree-Nuspec-AutoCompany)'=='true'">
+      <Company Condition="'$(Company)'==''">$(Authors)</Company>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition="'$(Coree-Nuspec-UseCompanyAuthors)'=='true'">
+      <Authors Condition="'$(Company)'!=''">$(Company)</Authors >
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Coree-Nuspec-AutoCopyright)'=='true'">
+      <Copyright Condition="'$(Copyright)'=='' AND '$(Company)'!=''">Copyright © $([System.DateTime]::Now.ToString("yyyy")) $(Company)</Copyright>
+    </PropertyGroup>
     
   </Target>
 

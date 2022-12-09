@@ -6,8 +6,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-
-
   <ItemGroup>
     <None Remove="C:\base\github.com\carsten-riedel\Coree\Coree.Win32\Coree.NuPack\Config\LICENSE.txt" />
   </ItemGroup>
@@ -33,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Coree.NuPack" Version="0.0.21207.1817">
+    <PackageReference Include="Coree.NuPack" Version="0.0.21208.1726">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
