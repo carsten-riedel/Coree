@@ -10,11 +10,15 @@
     <PackageId>Coree.NuPack</PackageId>
 
     <VersionMajor>0</VersionMajor>
-    <VersionMinor>0</VersionMinor>
+    <VersionMinor>1</VersionMinor>
     <VersionBuild>$([System.DateTime]::Now.ToString("yy").Substring(1,1))$([System.DateTime]::Now.ToString("MMdd").TrimStart('0'))</VersionBuild>
     <VersionRevision>1$([System.DateTime]::Now.ToString("HHmm").TrimStart('0'))</VersionRevision>
-    <VersionFull>$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</VersionFull>
+    <VersionFull Condition="'$(VersionRevision)'!='0'">$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</VersionFull>
+    <VersionFull Condition="'$(VersionRevision)'=='0'">$(VersionMajor).$(VersionMinor).$(VersionBuild)</VersionFull>
+    
     <VersionPrefix>$(VersionFull)</VersionPrefix>
+
+    
     <VersionSuffix Condition="'$(Configuration)'=='Debug'">debug</VersionSuffix>
     <VersionSuffix Condition="'$(Configuration)'=='Release'"></VersionSuffix>
 
