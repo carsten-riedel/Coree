@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <None Include="$(MSBuildProjectDirectory)\Coree.NuPack\*" Pack="true" PackagePath="\" Exclude="$(MSBuildProjectDirectory)\Coree.NuPack\NuPack.Constants.props;$(MSBuildProjectDirectory)\Coree.NuPack\NuPack.Edit.props;$(MSBuildProjectDirectory)\Coree.NuPack\NuPack.Secrets.props;$(MSBuildProjectDirectory)\Coree.NuPack\ReleaseNotes.txt;$(MSBuildProjectDirectory)\Coree.NuPack\.gitignore" />
+    <None Include="$(MSBuildProjectDirectory)\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   
 </Project>

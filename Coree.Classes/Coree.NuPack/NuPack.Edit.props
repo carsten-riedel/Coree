@@ -11,7 +11,7 @@
     <Coree-NuPack-VersionMajor>0</Coree-NuPack-VersionMajor>
     <Coree-NuPack-VersionMinor>1</Coree-NuPack-VersionMinor>
     
-    <Authors></Authors>
+    <Authors>Carsten Riedel</Authors>
     <Copyright></Copyright>
     <Company></Company>
     <Description>
@@ -19,11 +19,11 @@
 Package Description
 	]]>
     </Description>
-    <PackageTags></PackageTags>
+    <PackageTags>Coree;Classes</PackageTags>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl></RepositoryUrl>
-    <RepositoryType></RepositoryType>
-    <RepositoryBranch></RepositoryBranch>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryBranch>main</RepositoryBranch>
 
     <!-- Uses Enviroment Username for <Authors> if <Authors> is not set. -->
     <Coree-NuPack-AutoAuthors>true</Coree-NuPack-AutoAuthors>
