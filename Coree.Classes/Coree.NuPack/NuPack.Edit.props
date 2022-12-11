@@ -20,8 +20,8 @@ Package Description
 	]]>
     </Description>
     <PackageTags>Coree;Classes</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl>https://github.com/carsten-riedel/Coree/tree/main/Coree.Classes</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/carsten-riedel/Coree/</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryBranch>main</RepositoryBranch>
 
