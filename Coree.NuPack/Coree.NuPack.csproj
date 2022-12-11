@@ -36,7 +36,7 @@ Coree.NuPack base
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl></RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryBranch>develop</RepositoryBranch>
+    <RepositoryBranch>main</RepositoryBranch>
 
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -75,6 +75,10 @@ Coree.NuPack base
 
   <Target Name="NuBuildPackCopy" AfterTargets="Pack" Condition="'$(NuGetCopyDir)'!=''">
     <Copy SourceFiles="$(NuGetDirOutFile)" DestinationFolder="$(NuGetCopyDir)" />
+  </Target>
+  
+  <Target Name="NuBuildPackCopy1" AfterTargets="Pack" Condition="'$(OneDrive)'!=''">
+    <Copy SourceFiles="$(NuGetDirOutFile)" DestinationFolder="$(OneDrive)\Nuget" />
   </Target>
 
   <Target Name="NuBuildPush" AfterTargets="PostBuildEvent" Condition="'$(NuGetDirOutFile)'!='' AND '$(NugetKey)'!=''">

@@ -7,13 +7,5 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
-
-  <ItemGroup>
-    <PackageReference Include="Coree.NuBuild" Version="0.0.21204.1730">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
   
 </Project>
