@@ -68,6 +68,10 @@ Coree.NuPack base
     <None Include="This\*" Pack="true" PackagePath="\" Exclude="ReleaseNotes.txt" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Content\build\" />
+  </ItemGroup>
+
   <Target Name="NuBuildPack" AfterTargets="PostBuildEvent">
     <Message Text="ProjectName: $(ProjectName)" Importance="high" />
     <Exec Command="dotnet pack -p:PackageVersion=$(NugetVer) --no-build --configuration $(Configuration) --output &quot;$(NuGetDirOut)&quot;" />

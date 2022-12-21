@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
 
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <TargetFrameworks>net6.0-windows;net20;net35;net40;net45;net451;net452;net46;net461;net462;net47;net471;net472;net48</TargetFrameworks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,18 +31,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Coree.NuPack" Version="0.1.0">
+    <PackageReference Include="Coree.NuPack" Version="0.1.21220.1914">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
   
   <!-- https://learn.microsoft.com/en-us/nuget/reference/msbuild-targets -->
   <!-- https://learn.microsoft.com/en-us/cpp/build/reference/common-macros-for-build-commands-and-properties?view=msvc-170 -->
   <!-- https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-reserved-and-well-known-properties?view=vs-2022 -->
   <!-- https://learn.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props -->
   <!-- https://github.com/NuGet/NuGet.Client/blob/4.3.0.4202/src/NuGet.Core/NuGet.Build.Tasks.Pack.Library/Pack.targets -->
-  
 
-  
+
+
+	
+
 </Project>

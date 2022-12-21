@@ -1,0 +1,5 @@
+<Project>
+  
+  <Import Project="$(MSBuildProjectDirectory)\Coree.NuPack.targets\Coree.NuPack.targets"  Condition="Exists('$(MSBuildProjectDirectory)\Coree.NuPack.targets\Coree.NuPack.targets')"/>
+ 
+</Project>

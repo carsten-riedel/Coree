@@ -29,9 +29,6 @@
     <!-- Drops packages to project directory folder Coree.NuPack.Nupkg -->
     <Coree-NuPack-DefaultPackageOutputAbsolutePath>true</Coree-NuPack-DefaultPackageOutputAbsolutePath>
 
-    <!-- Push the package to nuget.org or nugettest.org if a key is set. -->
-    <Coree-NuPack-PushOnPackIfKeyIsSet>true</Coree-NuPack-PushOnPackIfKeyIsSet>
- 
   </PropertyGroup>
 
   <!-- Put constant values from the edit.props here -->
@@ -41,7 +38,8 @@
 
 
   <ItemGroup>
-    <None Include="$(MSBuildProjectDirectory)\Coree.NuPack\*" Pack="true" PackagePath="\" Exclude="$(MSBuildProjectDirectory)\Coree.NuPack\NuPack.Constants.props;$(MSBuildProjectDirectory)\Coree.NuPack\NuPack.Edit.props;$(MSBuildProjectDirectory)\Coree.NuPack\NuPack.Secrets.props;$(MSBuildProjectDirectory)\Coree.NuPack\ReleaseNotes.txt;$(MSBuildProjectDirectory)\Coree.NuPack\.gitignore" />
+    <None Include="$(MSBuildProjectDirectory)\Coree.NuPack.props\*" Pack="true" PackagePath="\" Exclude="$(MSBuildProjectDirectory)\Coree.NuPack.props\NuPack.Constants.props;$(MSBuildProjectDirectory)\Coree.NuPack.props\NuPack.Edit.props;$(MSBuildProjectDirectory)\Coree.NuPack.props\NuPack.Secrets.props;$(MSBuildProjectDirectory)\Coree.NuPack.props\ReleaseNotes.txt;$(MSBuildProjectDirectory)\Coree.NuPack.props\.gitignore" />
+    <None Include="$(MSBuildProjectDirectory)\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   
 </Project>
